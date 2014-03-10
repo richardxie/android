@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/C:/Users/richard.xie/Dropbox/android/android/build/exploded-aar/android.libraries.ActionBarSherlock/actionbarsherlock/unspecified/res/values-w500dp/values.xml -->
+    <eat-comment />
+
+    <integer name="abs__max_action_buttons">4</integer>
+
+</resources>

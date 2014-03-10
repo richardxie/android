@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pop_window_pressed_back">#ff277fbd</color>
+    <color name="header_btn_backgroud_press_color">#ff053e58</color>
+    <color name="lightgrey">#ff888888</color>
+    <color name="nav_page">#FFE1E8EB</color>
+</resources>

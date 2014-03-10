@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Message displayed when a gesture is successfully deleted -->
+    <string name="audio_delete_success">Audio deleted</string>
+    <!-- Message displayed when a gesture is successfully deleted -->
+    <string name="audio_delete_failed">Audio deleted failed</string>
+    <!-- Message displayed when the user has no audio -->
+    <string name="audio_empty">No Audio</string>
+    <string name="audio_rename_title">Rename Audio</string>
+    <string name="audio_rename_label">Audio name</string>
+    <string name="audio_rename_success">Audio renamed</string>
+    <string name="audio_rename_failed">Audio rename failed</string>
+
+</resources>

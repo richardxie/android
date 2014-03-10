@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+    
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6dip"
+            
+            android:text="@string/prompt_gesture_name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+    	 <EditText
+            android:id="@+id/audio_name"
+            android:layout_width="0dip"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+
+            android:maxLength="40"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@android:style/ButtonBar"
+
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/play"
+                
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:enabled="false"
+
+            android:onClick="play"
+            android:text="play" />
+    
+        <Button
+        	android:id="@+id/record"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            
+            android:onClick="record"
+            android:text="record" />
+       
+       <Button
+        	android:id="@+id/stop"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            
+            android:onClick="stop"
+            android:text="stop" />
+       
+       <Button
+            android:id="@id/done"
+                
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:enabled="false"
+
+            android:onClick="done"
+            android:text="@string/button_done" />
+    
+    </LinearLayout>
+    
+       <TextView
+           	android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6dip"
+            android:layout_gravity="center"
+            android:text="00:00"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+       <EditText
+           android:id="@+id/word"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:ems="10"
+           android:visibility="gone" >
+
+           <requestFocus />
+       </EditText>
+    
+</LinearLayout>
+<!-- From: file:/C:/Users/richard.xie/Dropbox/android/android/src/main/res/layout/add_sound.xml -->

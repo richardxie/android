@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.9.+'
+    }
+}
+
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "19.0.0"
+
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+        minSdkVersion 10
+        targetSdkVersion 19
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+    }
+    // Move the tests to tests/java, tests/res, etc...
+    instrumentTest.setRoot('tests')
+}
+
+dependencies {
+    compile project(':libraries:SlidingMenu:library')
+    compile project(':libraries:ActionBarSherlock:actionbarsherlock')
+    compile 'com.android.support:support-v4:+'
+    compile 'org.apache.commons:commons-lang3:3.1'
+    compile 'org.roboguice:roboguice:2.0'
+    compile 'com.loopj.android:android-async-http:1.4.4'
+    compile 'com.github.rtyley:roboguice-sherlock:1.5'
+    compile 'org.syncloud:dropbox-client:1.5.3'
+    compile 'org.apache.commons:commons-lang3:3.1'
+    compile 'commons-io:commons-io:2.4'
+    compile 'com.j256.ormlite:ormlite-android:4.47'
+    compile 'com.google.code.gson:gson:2.2.4'
+}
+
+
+

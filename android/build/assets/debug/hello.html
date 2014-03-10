@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html> 
+	<head> 
+	<style>
+		.xx {
+			font-style:italic;
+			font-size:250%;
+		}
+	</style>
+	<script>
+		function change() {
+			document.getElementById("output").className = "xx";
+		}
+	</script>
+	<title>jquery mobile in android</title> 
+	
+	<meta name="viewport" content="text/html; charset=UTF-8; width=device-width, initial-scale=1"> 
+
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page">
+
+	<div data-role="collapsible"  data-theme="c">
+		<h1>Jquery mobile Demo</h1>
+		<p>I'm the collapsible content. By default I'm closed, but you can click the header to open me.</p>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="a">	
+		<ul data-role="listview" data-inset="true" data-filter="true">
+			<li><a href="#">Acura</a></li>
+			<li><a href="#">Audi</a></li>
+			<li><a href="#">BMW</a></li>
+			<li><a href="#">Cadillac</a></li>
+			<li><a href="#">Ferrari</a></li>
+		</ul>
+		<form>
+		   <label for="slider-0">Input slider:</label>
+		   <input type="range" name="slider" id="slider-0" value="25" min="0" max="100"  />
+		</form>
+		<a href="#" data-role="button" data-inline="true" data-icon="star">Star button</a>
+		<div id="output">test</div>
+		<input type="submit" value="click" onclick="window.demo.showToast('Hello Android!')" />	
+		<div data-role="fieldcontain">
+		   <label for="select-choice-1" class="select">Shipping method:</label>
+		   <select name="select-choice-1" id="select-choice-1" data-mini="true">
+		      <option value="standard">Standard: 7 day</option>
+		      <option value="rush">Rush: 3 days</option>
+		      <option value="express">Express: next day</option>
+		      <option value="overnight">Overnight</option>
+		   </select>
+		</div>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+		<p>&copy; 2011-12 The jQuery Foundation email:richard.xie@corel.com</p>
+	</div><!-- /footer -->
+</div><!-- /page -->
+
+</body>
+</html>
