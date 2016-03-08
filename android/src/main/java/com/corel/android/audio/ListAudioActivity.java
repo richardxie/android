@@ -2,6 +2,7 @@ package com.corel.android.audio;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,17 +21,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.corel.android.R;
-import com.google.inject.Inject;
 
 import java.io.File;
 import java.util.Set;
 
-import roboguice.activity.RoboListActivity;
-import roboguice.inject.ContentView;
-import roboguice.inject.InjectView;
+import javax.inject.Inject;
 
-@ContentView(R.layout.audios_list)
-public class ListAudioActivity extends RoboListActivity {
+import butterknife.Bind;
+
+
+public class ListAudioActivity extends ListActivity {
 	
 	private static final int MENU_ID_RENAME = Menu.FIRST;
 	private static final int MENU_ID_REMOVE = Menu.FIRST + 1;
@@ -46,6 +46,7 @@ public class ListAudioActivity extends RoboListActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.audios_list);
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1);
 		setListAdapter(adapter);
@@ -231,9 +232,7 @@ public class ListAudioActivity extends RoboListActivity {
 		mAudioService.play();
 	}
 	
-	@InjectView(android.R.id.empty)
-	private TextView empty;
+	@Bind(android.R.id.empty) TextView empty;
 	
-	@Inject
-	private IPinYinAudioService mAudioService;
+	@Inject IPinYinAudioService mAudioService;
 }

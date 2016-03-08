@@ -6,8 +6,6 @@ import android.util.Log;
 import com.corel.android.pinyin.PinYin;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +22,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 @Singleton
 public class PinYinGSONDAO implements IPinYinDAO {
@@ -268,8 +269,7 @@ public class PinYinGSONDAO implements IPinYinDAO {
 
 	}
 
-	@Inject
-	private Context mContext;
+	@Inject Context mContext;
 	
 	//private int mCurrentCard;
 

@@ -1,5 +1,6 @@
 package com.corel.android.audio;
 
+import android.app.Activity;
 import android.media.AudioFormat;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -13,27 +14,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.corel.android.R;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 import java.io.File;
 import java.io.IOException;
 
-import roboguice.activity.RoboActivity;
-import roboguice.inject.ContentView;
-import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-@ContentView(R.layout.add_sound)
-public class AddAudioActivity extends RoboActivity{
+import butterknife.Bind;
+
+public class AddAudioActivity extends Activity {
 
 	private enum State { IDLE, RECORDING};
 	public static final int UPDATE = 1;
 	
-	@Inject @Named("PCM")
-	private IAudioRecorder mRecorder;
-	@Inject @Named("PCM")
-	private String prefix;
+	@Inject @Named("PCM") IAudioRecorder mRecorder;
+	@Inject @Named("PCM") String prefix;
 	private MediaPlayer mPlayer;
 	
 	private int mDuration;
@@ -52,6 +48,8 @@ public class AddAudioActivity extends RoboActivity{
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.add_sound);
+		mAudioName = getIntent().getStringExtra("name");
 		if (mAudioName == null)
 			mAudioName = "good";
 		mAudioNameTV.setText(mAudioName);
@@ -167,33 +165,25 @@ public class AddAudioActivity extends RoboActivity{
 		}
 	}
 	
-	@InjectView(R.id.play)
-	private Button mPlayBtn;
+	@Bind(R.id.play) Button mPlayBtn;
 	
-	@InjectView(R.id.stop)
-	private Button mStopBtn;
+	@Bind(R.id.stop) Button mStopBtn;
 	
-	@InjectView(R.id.record)
-	private Button mRecordBtn;
+	@Bind(R.id.record) Button mRecordBtn;
 	
-	@InjectView(R.id.done)
-	private Button mDoneBtn;
+	@Bind(R.id.done) Button mDoneBtn;
 	
-	@InjectView(R.id.time)
-	private TextView mTimeTV;
+	@Bind(R.id.time) TextView mTimeTV;
 	
-	@InjectView(R.id.audio_name)
-	private EditText mAudioNameTV;
-	
-	@InjectExtra(value="name", optional=true)
+	@Bind(R.id.audio_name) EditText mAudioNameTV;
+
 	private String mAudioName;
 	
-	@InjectView(R.id.word)
-	private TextView mWord;
+	@Bind(R.id.word) TextView mWord;
 	
 	@Inject
-	private IAudioRecognizeService mRecognizeService;
+	IAudioRecognizeService mRecognizeService;
 	
 	@Inject
-	private IPinYinAudioService mAudioService;
+	IPinYinAudioService mAudioService;
 }

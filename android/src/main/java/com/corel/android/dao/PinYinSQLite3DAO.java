@@ -9,13 +9,14 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
 import com.corel.android.pinyin.PinYin;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 @Singleton
 public class PinYinSQLite3DAO implements IPinYinDAO{
@@ -59,7 +60,7 @@ public class PinYinSQLite3DAO implements IPinYinDAO{
 		open();
 	}
 
-	// 打开数据库
+	//打开数据库
 
 	public void open() {
 		Log.i(TAG, "open");
@@ -196,6 +197,5 @@ public class PinYinSQLite3DAO implements IPinYinDAO{
 	
 	private DatabaseHelper mOpenHelper;
 
-	@Inject
-	private Context mContext;
+	@Inject Context mContext;
 }

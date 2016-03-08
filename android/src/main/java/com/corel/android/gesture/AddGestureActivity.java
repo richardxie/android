@@ -1,5 +1,6 @@
 package com.corel.android.gesture;
 
+import android.app.Activity;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
 import android.os.Bundle;
@@ -11,15 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.corel.android.R;
-import com.google.inject.Inject;
 
-import roboguice.activity.RoboActivity;
-import roboguice.inject.ContentView;
-import roboguice.inject.InjectExtra;
-import roboguice.inject.InjectView;
+import javax.inject.Inject;
 
-@ContentView(R.layout.add_gesture)
-public class AddGestureActivity extends RoboActivity {
+import butterknife.Bind;
+
+public class AddGestureActivity extends Activity {
 	private static final float LENGTH_THRESHOLD = 1.0f;
 	
     @Override
@@ -37,10 +35,12 @@ public class AddGestureActivity extends RoboActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.add_gesture);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,
                 WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
         
     	setTitle("Add a Gesture");
+        name = getIntent().getStringExtra(CreateGestureActivity.GESTURES_NAME);
         if(name != null) {
         	mGestureName.setText(name);
         }
@@ -128,16 +128,11 @@ public class AddGestureActivity extends RoboActivity {
         }
     }
     
-    @InjectView(R.id.done)
-    private View mDoneButton;
-    @InjectView(R.id.gestures_overlay)
-    private GestureOverlayView overlay;
-    @InjectView(R.id.gesture_name)
-    private EditText mGestureName;
-    @InjectExtra(value=CreateGestureActivity.GESTURES_NAME, optional=true)
+    @Bind(R.id.done)  View mDoneButton;
+    @Bind(R.id.gestures_overlay)  GestureOverlayView overlay;
+    @Bind(R.id.gesture_name) EditText mGestureName;
     private String name;
-    @Inject 
-	private IPinYinGestureService mGestureService;
+    @Inject IPinYinGestureService mGestureService;
     
     private Gesture mGesture;
 }

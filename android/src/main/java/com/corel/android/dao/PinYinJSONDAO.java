@@ -5,9 +5,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.corel.android.pinyin.PinYin;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
+
 
 import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
@@ -28,6 +26,10 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 @Singleton
 public class PinYinJSONDAO implements IPinYinDAO {
@@ -321,8 +323,7 @@ public class PinYinJSONDAO implements IPinYinDAO {
 	}
 
 
-	@Inject
-	private Context mContext;
+	@Inject Context mContext;
 	
 	//Cache for performance
 	//TODO
@@ -330,6 +331,5 @@ public class PinYinJSONDAO implements IPinYinDAO {
 	
 	//private JSONArray mCurrentPinYin;
 
-	@Inject @Named("JSON_FILE")
-	private String JSON_FILE;
+	@Inject @Named("JSON_FILE") String JSON_FILE;
 }

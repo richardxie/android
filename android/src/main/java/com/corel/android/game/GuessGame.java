@@ -1,5 +1,6 @@
 package com.corel.android.game;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
@@ -13,10 +14,7 @@ import com.corel.android.pinyin.PinYin;
 
 import java.util.ArrayList;
 
-import roboguice.activity.RoboActivity;
-import roboguice.inject.InjectExtra;
-
-public class GuessGame extends RoboActivity {
+public class GuessGame extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,17 +42,18 @@ public class GuessGame extends RoboActivity {
 		 ll.setGravity(Gravity.CENTER);  
 		 ll.addView(label);  
 		 ll.addView(pic);  
-		 setContentView(ll); 
+		 setContentView(ll);
+
+		mType = getIntent().getIntExtra("type", 1);
+		mWords = getIntent().getExtras().getParcelableArrayList("Words");
 	}
 	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
 	}
-	
-	@InjectExtra("type")
+
 	private int mType;
-	
-	@InjectExtra("Words")
+
     public ArrayList<PinYin> mWords;
 }

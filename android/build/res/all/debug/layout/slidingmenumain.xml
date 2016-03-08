@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.jeremyfeinstein.slidingmenu.lib.SlidingMenu xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/slidingmenumain"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" /><!-- From: file:/C:/Users/richard.xie/Dropbox/android/libraries/SlidingMenu/library/res/layout/slidingmenumain.xml --><!-- From: file:/C:/Users/richard.xie/Dropbox/android/android/build/exploded-aar/android.libraries.SlidingMenu/library/unspecified/res/layout/slidingmenumain.xml -->

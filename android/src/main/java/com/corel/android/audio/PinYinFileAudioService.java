@@ -7,9 +7,6 @@ import android.util.Log;
 
 import com.corel.android.http.HttpClientStratgy;
 import com.corel.android.pinyin.PinYin;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -19,6 +16,10 @@ import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.FutureTask;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 //import com.corel.android.javaFlacEncoder.FLAC_FileEncoder;
 //import com.corel.android.javaFlacEncoder.FLAC_FileEncoder.Status;
@@ -214,6 +215,5 @@ public class PinYinFileAudioService implements IPinYinAudioService, IAudioRecogn
 	private HashMap<String, Integer> mSoundMap = new HashMap<String, Integer>();
 	private FutureTask<SoundPool> mTask;
 	
-	@Inject @Named("SYNC")
-	private HttpClientStratgy mHttpClient;
+	@Inject @Named("SYNC")  HttpClientStratgy mHttpClient;
 }

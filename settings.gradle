@@ -1,3 +1,2 @@
 include ':android'
-include ':libraries:SlidingMenu:library'
-include ':libraries:ActionBarSherlock:actionbarsherlock'
+include ':slidingmenu'

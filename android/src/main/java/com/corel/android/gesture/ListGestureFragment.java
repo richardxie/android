@@ -1,9 +1,10 @@
 package com.corel.android.gesture;
 
-import roboguice.fragment.RoboListFragment;
+
+import android.app.ListFragment;
 
 /**
  * Created by richard.xie on 14-3-9.
  */
-public class ListGestureFragment extends RoboListFragment {
+public class ListGestureFragment extends ListFragment {
 }

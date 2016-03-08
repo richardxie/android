@@ -3,6 +3,7 @@ package com.corel.android.pinyin;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,8 +20,6 @@ import com.corel.android.dao.IPinYinDAO;
 import com.corel.android.gesture.CreateGestureActivity;
 import com.corel.android.http.AsyncHttpClientStrategy;
 import com.corel.android.http.HttpClientStratgy;
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 import org.apache.commons.io.IOUtils;
 
@@ -28,15 +27,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Provider;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
-import roboguice.service.RoboService;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-public class PinyinService extends RoboService implements IPinYinService{
+
+public class PinyinService extends Service implements IPinYinService{
 
 	private final static String TAG = "PinYinService";
 	private Looper mServiceLooper;
@@ -258,9 +260,9 @@ public class PinyinService extends RoboService implements IPinYinService{
 		return f.exists();
 	}
 	
-	private @Inject	NotificationManager mNM;
-	private @Inject  @Named("ASYNC") HttpClientStratgy mClient;
-	private @Inject @Named("JSON") IPinYinDAO mDB;
+	@Inject	NotificationManager mNM;
+	@Inject  @Named("ASYNC") HttpClientStratgy mClient;
+	@Inject @Named("JSON") IPinYinDAO mDB;
 	private static final File PINYIN_COMMON_SOUND_FOLDER = new File(Environment.getExternalStorageDirectory() + "/PinYin/sounds");
 	private int mCurrentCard;
 }

@@ -8,6 +8,7 @@ import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.BaseColumns;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,26 +20,27 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
 import com.corel.android.gesture.CreateGestureActivity;
 import com.corel.android.pinyin.PinyinService;
-import com.github.rtyley.android.sherlock.roboguice.activity.RoboSherlockFragmentActivity;
-import com.google.inject.Inject;
+
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import roboguice.activity.RoboActivity;
-import roboguice.inject.ContentView;
-import roboguice.inject.InjectView;
+import javax.inject.Inject;
 
-@ContentView(R.layout.main)
-public class HelloAndroidActivity extends RoboSherlockFragmentActivity implements SearchView.OnQueryTextListener,
-        SearchView.OnSuggestionListener{
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class HelloAndroidActivity extends SherlockFragmentActivity implements SearchView.OnQueryTextListener,
+		SearchView.OnSuggestionListener{
 
 	private static String TAG = "andorid";
 
@@ -62,8 +64,10 @@ public class HelloAndroidActivity extends RoboSherlockFragmentActivity implement
 	public void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_Sherlock_Light);
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.main);
+		ButterKnife.bind(this);
 		Log.i(TAG, "onCreate");
-		tv.setText("RoboGuice workable!");
+		tv.setText("ButterKnife/Dagger workable!");
 		WebSettings webSettings = webView.getSettings();
 		webSettings.setJavaScriptEnabled(true);
 		webView.addJavascriptInterface(javaScript = new JavaScriptInterface(this), "demo");
@@ -98,67 +102,69 @@ public class HelloAndroidActivity extends RoboSherlockFragmentActivity implement
 		}
 		else if(v.getId() == android.R.id.button2) {
 			Intent intent = new Intent(this, CreateGestureActivity.class);
-			
+            String words = getWords(this, 1);
+            intent.putExtra("Words", words);
+            intent.putExtra("CardId", 1);
 			startActivity(intent);
 		}
 	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Used to put dark icons on light action bar
-        boolean isLight = true;
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		//Used to put dark icons on light action bar
+		boolean isLight = true;
 
-        //Create the search view
-        SearchView searchView = new SearchView(getSupportActionBar().getThemedContext());
-        searchView.setQueryHint("Search for countries…");
-        searchView.setOnQueryTextListener(this);
-        searchView.setOnSuggestionListener(this);
+		//Create the search view
+		SearchView searchView = new SearchView(getSupportActionBar().getThemedContext());
+		searchView.setQueryHint("Search for countries");
+		searchView.setOnQueryTextListener(this);
+		searchView.setOnSuggestionListener(this);
 
-        if (mSuggestionsAdapter == null) {
-            MatrixCursor cursor = new MatrixCursor(COLUMNS);
-            cursor.addRow(new String[]{"1", "'Murica"});
-            cursor.addRow(new String[]{"2", "Canada"});
-            cursor.addRow(new String[]{"3", "Denmark"});
-            mSuggestionsAdapter = new SuggestionsAdapter(getSupportActionBar().getThemedContext(), cursor);
-        }
+		if (mSuggestionsAdapter == null) {
+			MatrixCursor cursor = new MatrixCursor(COLUMNS);
+			cursor.addRow(new String[]{"1", "'Murica"});
+			cursor.addRow(new String[]{"2", "Canada"});
+			cursor.addRow(new String[]{"3", "Denmark"});
+			mSuggestionsAdapter = new SuggestionsAdapter(getSupportActionBar().getThemedContext(), cursor);
+		}
 
-        searchView.setSuggestionsAdapter(mSuggestionsAdapter);
+		searchView.setSuggestionsAdapter(mSuggestionsAdapter);
 
-        menu.add("Search")
-                .setIcon(isLight ? R.drawable.ic_search_inverse : R.drawable.abs__ic_search)
-                .setActionView(searchView)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		menu.add("Search")
+				.setIcon(isLight ? R.drawable.ic_search_inverse : R.drawable.abs__ic_search)
+				.setActionView(searchView)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
-        menu.add("Refresh")
-                .setIcon( isLight ? R.drawable.ic_refresh_inverse : R.drawable.ic_refresh)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menu.add("Refresh")
+				.setIcon( isLight ? R.drawable.ic_refresh_inverse : R.drawable.ic_refresh)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
-        menu.add("SignIn")
-                .setIcon( R.drawable.xg_sign_in)
-                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menu.add("SignIn")
+				.setIcon( R.drawable.xg_sign_in)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
+	@Override
+	public boolean onQueryTextSubmit(String query) {
+		return false;
+	}
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
+	@Override
+	public boolean onQueryTextChange(String newText) {
+		return false;
+	}
 
-    @Override
-    public boolean onSuggestionSelect(int position) {
-        return false;
-    }
+	@Override
+	public boolean onSuggestionSelect(int position) {
+		return false;
+	}
 
-    @Override
-    public boolean onSuggestionClick(int position) {
-        return false;
-    }
+	@Override
+	public boolean onSuggestionClick(int position) {
+		return false;
+	}
 
     private class SuggestionsAdapter extends CursorAdapter {
 
@@ -227,8 +233,8 @@ public class HelloAndroidActivity extends RoboSherlockFragmentActivity implement
 		return "";
 	}
 
-	private @InjectView(R.id.tv) TextView tv;
-	private @InjectView(R.id.webview) WebView webView;
-	private @Inject Handler handler;
+	 @Bind(R.id.tv) TextView tv;
+	 @Bind(R.id.webview) WebView webView;
+	private Handler handler = new Handler();
 	private JavaScriptInterface javaScript;
 }

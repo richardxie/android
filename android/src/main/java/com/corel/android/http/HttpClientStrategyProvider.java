@@ -1,6 +1,6 @@
 package com.corel.android.http;
 
-import com.google.inject.Provider;
+import javax.inject.Provider;
 
 public class HttpClientStrategyProvider implements Provider<HttpClientStratgy> {
 
