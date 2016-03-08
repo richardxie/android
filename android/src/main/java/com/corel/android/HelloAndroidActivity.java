@@ -25,6 +25,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
+import com.corel.android.audio.bd.ActivityMain;
 import com.corel.android.gesture.CreateGestureActivity;
 import com.corel.android.pinyin.PinyinService;
 
@@ -135,14 +136,26 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
 				.setActionView(searchView)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
-		menu.add("Refresh")
-				.setIcon( isLight ? R.drawable.ic_refresh_inverse : R.drawable.ic_refresh)
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menu.add(0,0,0,"Refresh")
+				.setIcon(isLight ? R.drawable.ic_refresh_inverse : R.drawable.ic_refresh)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
-		menu.add("SignIn")
+		menu.add(0,1,0,"SignIn")
 				.setIcon( R.drawable.xg_sign_in)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()) {
+			case 1:
+				Intent intent = new Intent(this, ActivityMain.class);
+				startActivity(intent);
+				break;
+		}
 		return true;
 	}
 

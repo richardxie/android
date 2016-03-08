@@ -1,7 +1,9 @@
 package com.corel.android;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.LocationManager;
+import android.preference.PreferenceManager;
 
 import javax.inject.Singleton;
 
@@ -35,5 +37,11 @@ public class AndroidModule {
     @Provides @Singleton
     LocationManager provideLocationManager() {
         return (LocationManager) application.getSystemService(LOCATION_SERVICE);
+    }
+
+    @Provides
+    @Singleton
+    SharedPreferences provideSharedPreferences(){
+        return PreferenceManager.getDefaultSharedPreferences(application);
     }
 }

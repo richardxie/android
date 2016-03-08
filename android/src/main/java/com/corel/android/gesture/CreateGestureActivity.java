@@ -16,8 +16,6 @@ import java.util.ArrayList;
 
 import javax.inject.Inject;
 
-//import com.corel.android.cloud.DropBoxActivity;
-
 public class CreateGestureActivity extends ListActivity {
 
 	public static final String TAG = "CreateGestureActivity";
@@ -26,6 +24,7 @@ public class CreateGestureActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.create_gestures);
 
+		mWords = getIntent().getParcelableArrayListExtra("Words");
 		if(settings != null) {
 			int card = settings.getInt("card", 1);
 			Log.i(TAG, "current card:" + card);
@@ -58,10 +57,8 @@ public class CreateGestureActivity extends ListActivity {
 	public static final String GESTURES_NAME = "gesture.name";
 	
 	@Inject SharedPreferences settings;
-	
-	//@InjectExtra("Words")
+
     public ArrayList<PinYin> mWords;
 	
-	//@Inject
-	//private IPinYinGestureService mGestureService;
+	@Inject IPinYinGestureService mGestureService;
 }
