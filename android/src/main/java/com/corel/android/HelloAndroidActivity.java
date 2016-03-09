@@ -8,7 +8,6 @@ import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.BaseColumns;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +24,8 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.widget.SearchView;
-import com.corel.android.audio.bd.ActivityMain;
+import com.corel.android.audio.recognizer.ActivityMain;
+import com.corel.android.audio.tts.MainActivity;
 import com.corel.android.gesture.CreateGestureActivity;
 import com.corel.android.pinyin.PinyinService;
 
@@ -106,6 +106,10 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
             String words = getWords(this, 1);
             intent.putExtra("Words", words);
             intent.putExtra("CardId", 1);
+			startActivity(intent);
+		}
+		else if(v.getId() == android.R.id.button3) {
+			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 		}
 	}
