@@ -17,11 +17,18 @@
         android:text="@string/button" 
         android:onClick="clicked"/>
     
-     <Button
+    <Button
         android:id="@android:id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/button" 
+        android:onClick="clicked"/>
+
+    <Button
+        android:id="@android:id/button3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button"
         android:onClick="clicked"/>
 
     <WebView

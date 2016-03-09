@@ -11,6 +11,10 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
     <application
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -33,7 +37,7 @@
         </activity>
 
         <activity
-            android:name="com.corel.android.audio.bd.ActivityMain"
+            android:name="com.corel.android.audio.recognizer.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:theme="@android:style/Theme.DeviceDefault.Light"
             android:screenOrientation="portrait">
@@ -43,20 +47,20 @@
             <!--</intent-filter>-->
         </activity>
         <activity
-            android:name="com.corel.android.audio.bd.ApiActivity"
+            android:name="com.corel.android.audio.recognizer.ApiActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:theme="@android:style/Theme.DeviceDefault.Light"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.corel.android.audio.bd.ActivityTouch"
+            android:name="com.corel.android.audio.recognizer.ActivityTouch"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:theme="@android:style/Theme.DeviceDefault.Light"
             android:screenOrientation="portrait">
         </activity>
 
         <activity
-            android:name="com.corel.android.audio.bd.Setting"
+            android:name="com.corel.android.audio.recognizer.Setting"
             android:label="设置"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:theme="@android:style/Theme.DeviceDefault.Light"
@@ -66,6 +70,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".audio.tts.MainActivity" />
+        <activity android:name=".audio.tts.ModelManagerActivity" />
 
         <activity android:name=".HelloAndroidActivity" >
             <intent-filter>

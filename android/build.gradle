@@ -4,30 +4,48 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.3.1'
+        classpath "com.android.tools.build:gradle:${rootProject.ext.androidGradleVersion}"
         classpath 'me.tatarka:gradle-retrolambda:3.0.0'
         classpath "com.neenbedankt.gradle.plugins:android-apt:${rootProject.ext.androidAptVersion}"
     }
 }
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         versionCode 1
         versionName "1.0"
-        minSdkVersion 15
-        targetSdkVersion 19
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    signingConfigs {
+        myConfig {
+            storeFile file("keystore/slb.keystore")
+            storePassword "1234qwer"
+            keyAlias "shanlinjinrong"
+            keyPassword "1234qwer"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+            signingConfig signingConfigs.myConfig
+        }
+    }
+
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
@@ -60,11 +78,10 @@ dependencies {
     compile "io.reactivex:rxjava:${rootProject.ext.rxJavaVersion}"
     compile "io.reactivex:rxandroid:${rootProject.ext.rxAndroidVersion}"
 
-    compile 'com.android.support:support-v4:22.0.+'
+    compile "com.android.support:support-v4:${rootProject.ext.supportV4}"
 	
     compile 'org.apache.commons:commons-lang3:3.1'
     compile 'com.loopj.android:android-async-http:1.4.4'
-    //compile 'org.syncloud:dropbox-client:1.5.3'
     compile 'commons-io:commons-io:2.4'
     compile 'com.j256.ormlite:ormlite-android:4.47'
     compile 'com.google.code.gson:gson:2.2.4'
