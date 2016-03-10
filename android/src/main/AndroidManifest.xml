@@ -23,6 +23,7 @@
         <meta-data android:name="com.baidu.speech.APP_ID" android:value="7835409"/>
         <meta-data android:name="com.baidu.speech.API_KEY" android:value="0Ne6SkI7vqAPO3S2CNlXWnMc"/>
         <meta-data android:name="com.baidu.speech.SECRET_KEY" android:value="bc6cad9d7514a4a7239df377f0e86c0f"/>
+        <meta-data android:name="com.baidu.apiStore.API_KEY" android:value="467fe77c025e833dbfc226e45b5afc1b"/>
         <service android:name="com.baidu.speech.VoiceRecognitionService" android:exported="false" />
         <activity
             android:name="com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog"

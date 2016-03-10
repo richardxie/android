@@ -2,6 +2,7 @@ package com.corel.android;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
 
@@ -43,5 +44,11 @@ public class AndroidModule {
     @Singleton
     SharedPreferences provideSharedPreferences(){
         return PreferenceManager.getDefaultSharedPreferences(application);
+    }
+
+    @Provides
+    @Singleton
+    PackageManager providePackageManager() {
+        return application.getPackageManager();
     }
 }

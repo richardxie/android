@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${rootProject.ext.androidGradleVersion}"
-        classpath 'me.tatarka:gradle-retrolambda:3.0.0'
+        classpath "me.tatarka:gradle-retrolambda:${rootProject.ext.retroLambdaVersion}"
         classpath "com.neenbedankt.gradle.plugins:android-apt:${rootProject.ext.androidAptVersion}"
     }
 }
@@ -86,6 +86,9 @@ dependencies {
     compile 'com.j256.ormlite:ormlite-android:4.47'
     compile 'com.google.code.gson:gson:2.2.4'
     compile "com.google.guava:guava:${rootProject.ext.guavaVersion}"
+    compile "com.squareup.retrofit:retrofit:${rootProject.ext.retrofitVersion}"
+    provided "org.projectlombok:lombok:${rootProject.ext.lombokVersion}"
+    apt "org.projectlombok:lombok:${rootProject.ext.lombokVersion}"
 }
 
 
