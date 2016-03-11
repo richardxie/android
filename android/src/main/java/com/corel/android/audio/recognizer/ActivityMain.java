@@ -10,6 +10,8 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.corel.android.R;
+import com.corel.android.pinyin.ResponsePinyin;
+import com.corel.android.pinyin.service.PinyinAPI;
 import com.corel.android.translate.service.ResponseData;
 import com.corel.android.translate.service.BaiduTranslateApi;
 
@@ -49,6 +51,20 @@ public class ActivityMain extends PreferenceActivity {
                             Log.d("Demo", "onCompleted!");
                         }
                 );
+
+        pinyinObservable().subscribeOn(HandlerScheduler.from(backgroundHandler))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        (c) -> {
+                            Log.d("Demo", "onNext:" + c);
+                        },
+                        (Throwable e) -> {
+                            Log.e("Ops! Error: ", "Rx Did it again!", e);
+                        },
+                        () -> {
+                            Log.d("Demo", "onCompleted!");
+                        }
+                );
     }
 
     private static Observable<ResponseData> translateObservable() {
@@ -58,12 +74,12 @@ public class ActivityMain extends PreferenceActivity {
                 // Retrofit section start from here...
                 // create an adapter for retrofit with base url
                 RestAdapter restAdapter = new RestAdapter.Builder()
-                        .setEndpoint(com.corel.android.translate.Constant.URL)
+                        .setEndpoint(com.corel.android.Constant.TRANSLATE_SERVICE_URL)
                         .setLogLevel(RestAdapter.LogLevel.FULL)
                         .setRequestInterceptor(new RequestInterceptor() {
                             @Override
                             public void intercept(RequestFacade request) {
-                                request.addHeader("apikey", "application/json;versions=1");
+                                request.addHeader("apikey", com.corel.android.Constant.APPSTORE_KEY);
                             }
                         })
                         .build();
@@ -71,6 +87,30 @@ public class ActivityMain extends PreferenceActivity {
                 // creating a service for adapter with our GET class
                 BaiduTranslateApi demo = restAdapter.create(BaiduTranslateApi.class);
                 return Observable.just(demo.translate("I'm chinese", "en", "zh"));
+            }
+        });
+    }
+
+    private static Observable<ResponsePinyin> pinyinObservable() {
+        return Observable.defer(new Func0<Observable<ResponsePinyin>>() {
+            @Override
+            public Observable<ResponsePinyin> call() {
+                // Retrofit section start from here...
+                // create an adapter for retrofit with base url
+                RestAdapter restAdapter = new RestAdapter.Builder()
+                        .setEndpoint(com.corel.android.Constant.PINYIN_SERVICE_URL)
+                        .setLogLevel(RestAdapter.LogLevel.FULL)
+                        .setRequestInterceptor(new RequestInterceptor() {
+                            @Override
+                            public void intercept(RequestFacade request) {
+                                request.addHeader("apikey", com.corel.android.Constant.APPSTORE_KEY);
+                            }
+                        })
+                        .build();
+
+                // creating a service for adapter with our GET class
+                PinyinAPI demo = restAdapter.create(PinyinAPI.class);
+                return Observable.just(demo.topinyin("我", "1"));
             }
         });
     }

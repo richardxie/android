@@ -87,6 +87,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile "com.google.guava:guava:${rootProject.ext.guavaVersion}"
     compile "com.squareup.retrofit:retrofit:${rootProject.ext.retrofitVersion}"
+    compile "com.squareup.okhttp:okhttp:${rootProject.ext.okhttpVersion}"
     provided "org.projectlombok:lombok:${rootProject.ext.lombokVersion}"
     apt "org.projectlombok:lombok:${rootProject.ext.lombokVersion}"
 }

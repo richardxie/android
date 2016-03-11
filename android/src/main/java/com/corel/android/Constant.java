@@ -1,13 +1,9 @@
-package com.corel.android.translate;
-
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-
-import javax.inject.Inject;
+package com.corel.android;
 
 public class Constant {
-    public static final String URL = "http://apis.baidu.com/apistore/tranlateservice";
-    public static String mAppKey;
+    public static final String TRANSLATE_SERVICE_URL = "http://apis.baidu.com/apistore/tranlateservice";
+    public static final String PINYIN_SERVICE_URL = "http://apis.baidu.com/sillystudio/service";
+    public static String APPSTORE_KEY = "467fe77c025e833dbfc226e45b5afc1b";
 
 //    @Inject
 //    static ApplicationContext packageManager;
