@@ -4,7 +4,8 @@ ext {
     minSdkVersion = 15
     targetSdkVersion = 22
 
-    androidGradleVersion = '1.5.0'
+    androidGradleVersion = '2.0.0-beta6'
+    androidGradleExperimentalVersion = '0.6.0-beta6'
     buildToolsVersion = '22.0.1'
     retroLambdaVersion = '3.1.0'
     okhttpVersion = '2.3.0'

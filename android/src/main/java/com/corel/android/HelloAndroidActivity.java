@@ -27,6 +27,7 @@ import com.actionbarsherlock.widget.SearchView;
 import com.corel.android.audio.recognizer.ActivityMain;
 import com.corel.android.audio.tts.MainActivity;
 import com.corel.android.gesture.CreateGestureActivity;
+import com.corel.android.opencv.Tutorial1Activity;
 import com.corel.android.pinyin.PinYin;
 import com.corel.android.pinyin.PinyinService;
 
@@ -99,11 +100,13 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
 	public void clicked(View v) {
 		if(v.getId() == android.R.id.button1) {
 			javaScript.clickOnAndroid();
-			Intent intent = new Intent(this, PinyinService.class);
+			Intent intent = new Intent(this, Tutorial1Activity.class);
+			startActivity(intent);
+			/*Intent intent = new Intent(this, PinyinService.class);
 			String words = getWords(this, 1);
 			intent.putExtra("Words", words);
 			intent.putExtra("CardId", 1);
-			startService(intent);
+			startService(intent);*/
 		}
 		else if(v.getId() == android.R.id.button2) {
 			Intent intent = new Intent(this, CreateGestureActivity.class);

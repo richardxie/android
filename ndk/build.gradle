@@ -1,13 +1,29 @@
-apply plugin: 'com.android.model.application'
+apply plugin: 'com.android.model.library'
+
+def opencv_sdk_path = file(project(':opencv').projectDir).absolutePath + "/src/main"
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath  'com.android.tools.build:gradle-experimental:0.4.0'
+        classpath  "com.android.tools.build:gradle-experimental:${rootProject.ext.androidGradleExperimentalVersion}"
     }
 }
 model {
+    repositories {
+        libs(PrebuiltLibraries) {
+            opencv {
+                headers.srcDir "${opencv_sdk_path}/jni/include"
+                binaries.withType(StaticLibraryBinary) {
+                    staticLibraryFile = file("${opencv_sdk_path}/jniLibs/armeabi/libopencv_core.a")
+                   // staticLibraryFile = file("${opencv_sdk_path}/jniLibs/armeabi/libtbb.a")
+
+                }
+            }
+        }
+    }
+
     android {
         compileSdkVersion = rootProject.ext.compileSdkVersion
         buildToolsVersion = rootProject.ext.buildToolsVersion
@@ -22,14 +38,52 @@ model {
     }
 	android.ndk {
 		moduleName = "test"
-        cppFlags.addAll(["-I${file("../opencv/src/main/jni/include")}".toString(),
-                         "-I${file("../opencv/src/main/jni/opencv2")}".toString()])
+        cppFlags.addAll([
+                         "-fexceptions","-frtti",
+                         "-std=c++11"])
         // CFlags is configured in similiar way as cppFlags
         // CFlags.add("-I${file("src/main/jni/native_app_glue")}".toString())
-        //ldLibs.addAll(["android", "EGL", "GLESv2","log"])
-        //stl         = "stlport_static"
-	}
+        ldLibs.addAll(["android","log", "opencv_java3"])
+        //stl         = "c++_static"
+        stl    = "gnustl_static"
+        abiFilters.addAll(["armeabi"]) //filtering ABIs on the ones Google Play Games library is compatible with.
+        //abiFilters.addAll(["armeabi", "armeabi-v7a", "x86", "arm64-v8a"]) //filtering ABIs on the ones Google Play Games library is compatible with.
     }
+
+    android.sources {
+        main {
+            jni {
+                source {
+                    srcDirs 'src/main/jni'
+                }
+                dependencies {
+                   library 'opencv' linkage 'static'
+                }
+            }
+        }
+    }
+
+
+    android.productFlavors {
+        create("arm") {
+            ndk.abiFilters.add("armeabi")
+        }
+        create ("arm8") {
+            ndk.abiFilters.add("arm64-v8a")
+        }
+        create ("arm7") {
+            ndk.abiFilters.add("armeabi-v7a")
+        }
+        create ("x86-32") {
+            ndk.abiFilters.add("x86")
+        }
+        // for detailed abiFilter descriptions, refer to "Supported ABIs" @
+        // https://developer.android.com/ndk/guides/abis.html#sa
+        // build one including all productFlavors
+        create("all")
+    }
+
+}
 
 dependencies {
     compile project( ':opencv')
