@@ -11,13 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.corel.android.BaseButterKnifeActivity;
+import com.corel.android.HelloAndroidApplication;
 import com.corel.android.R;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 
-public class AddGestureActivity extends Activity {
+public class AddGestureActivity extends BaseButterKnifeActivity {
 	private static final float LENGTH_THRESHOLD = 1.0f;
 	
     @Override
@@ -44,7 +46,7 @@ public class AddGestureActivity extends Activity {
         if(name != null) {
         	mGestureName.setText(name);
         }
-
+        ((HelloAndroidApplication) getApplication()).inject(this);
         overlay.setGestureStrokeType(GestureOverlayView.GESTURE_STROKE_TYPE_MULTIPLE);
         overlay.addOnGestureListener(new GesturesProcessor());
     }

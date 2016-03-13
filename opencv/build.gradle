@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath  'com.android.tools.build:gradle-experimental:0.4.0'
+    }
+}
+apply plugin: 'com.android.model.library'
+
+dependencies {
+    compile "com.android.support:support-v4:${rootProject.ext.supportV4}"
+}
+
+model {
+    android {
+        compileSdkVersion = rootProject.ext.compileSdkVersion
+        buildToolsVersion =  rootProject.ext.buildToolsVersion
+
+        defaultConfig.with {
+            minSdkVersion.apiLevel = rootProject.ext.minSdkVersion
+            targetSdkVersion.apiLevel = rootProject.ext.targetSdkVersion
+        }
+    }
+    android.ndk {
+        moduleName = "opencv"
+    }
+
+    android.sources {
+        main {
+            jni {
+                source {
+                    srcDirs 'src/main/jni'
+                }
+            }
+            aidl {
+                source {
+                    srcDirs 'src/main/aidl'
+                }
+            }
+        }
+    }
+}

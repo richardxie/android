@@ -1,2 +1,4 @@
 include ':android'
 include ':slidingmenu'
+include ':ndk'
+include ':opencv'

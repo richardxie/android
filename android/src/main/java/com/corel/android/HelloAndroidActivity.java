@@ -27,13 +27,17 @@ import com.actionbarsherlock.widget.SearchView;
 import com.corel.android.audio.recognizer.ActivityMain;
 import com.corel.android.audio.tts.MainActivity;
 import com.corel.android.gesture.CreateGestureActivity;
+import com.corel.android.pinyin.PinYin;
 import com.corel.android.pinyin.PinyinService;
 
+import com.google.common.collect.Lists;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -103,8 +107,10 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
 		}
 		else if(v.getId() == android.R.id.button2) {
 			Intent intent = new Intent(this, CreateGestureActivity.class);
-            String words = getWords(this, 1);
-            intent.putExtra("Words", words);
+            //String words = getWords(this, 1);
+			ArrayList<PinYin> words = Lists.newArrayList();
+			words.add(new PinYin("好", "good", "hao"));
+			intent.putParcelableArrayListExtra("Words", words);
             intent.putExtra("CardId", 1);
 			startActivity(intent);
 		}

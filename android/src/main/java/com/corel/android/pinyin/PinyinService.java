@@ -37,7 +37,6 @@ import java.util.concurrent.CountDownLatch;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-
 public class PinyinService extends Service implements IPinYinService{
 
 	private final static String TAG = "PinYinService";
@@ -57,8 +56,6 @@ public class PinyinService extends Service implements IPinYinService{
 		@Override
 		public void handleMessage(Message msg) {
 			Log.i(TAG, "handleMessage:" + msg);
-			// Normally we would do some work here, like download a file.
-			// For our sample, we just sleep for 5 seconds.
 			String words = (String)msg.obj;
 			int len =  words.length();
 			int i = 0;

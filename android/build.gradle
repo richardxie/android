@@ -68,6 +68,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':slidingmenu')
+    compile project(':opencv')
 
     compile "com.jakewharton:butterknife:${rootProject.ext.butterKnifeVersion}"
     compile "com.squareup.dagger:dagger:${rootProject.ext.daggerVersion}"

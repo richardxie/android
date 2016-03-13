@@ -1,0 +1,43 @@
+apply plugin: 'com.android.model.application'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath  'com.android.tools.build:gradle-experimental:0.4.0'
+    }
+}
+model {
+    android {
+        compileSdkVersion = rootProject.ext.compileSdkVersion
+        buildToolsVersion = rootProject.ext.buildToolsVersion
+
+        defaultConfig.with {
+            versionCode = 1
+            versionName = "1.0"
+            minSdkVersion.apiLevel = rootProject.ext.minSdkVersion
+            targetSdkVersion.apiLevel = rootProject.ext.targetSdkVersion
+        }
+ 
+    }
+	android.ndk {
+		moduleName = "test"
+        cppFlags.addAll(["-I${file("../opencv/src/main/jni/include")}".toString(),
+                         "-I${file("../opencv/src/main/jni/opencv2")}".toString()])
+        // CFlags is configured in similiar way as cppFlags
+        // CFlags.add("-I${file("src/main/jni/native_app_glue")}".toString())
+        //ldLibs.addAll(["android", "EGL", "GLESv2","log"])
+        //stl         = "stlport_static"
+	}
+    }
+
+dependencies {
+    compile project( ':opencv')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile "com.android.support:support-v4:${rootProject.ext.supportV4}"
+
+}
+
+
+

@@ -7,6 +7,7 @@ import com.corel.android.audio.PinYinFileAudioService;
 import com.corel.android.dao.IPinYinDAO;
 import com.corel.android.dao.PinYinJSONDAO;
 import com.corel.android.dao.PinYinSQLite3DAO;
+import com.corel.android.gesture.AddGestureActivity;
 import com.corel.android.gesture.IPinYinGestureService;
 import com.corel.android.gesture.PinYinGestureService;
 import com.corel.android.http.AsyncHttpClientStrategy;
@@ -22,7 +23,9 @@ import dagger.Provides;
 //import com.corel.android.audio.ExtAudioRecorder;
 //import com.corel.android.audio.FLACAudioRecorder;
 @Module(
-		injects = AddAudioActivity.class,
+		injects = {
+				AddAudioActivity.class,
+				AddGestureActivity.class},
 		complete = false,
 		library = true
 )

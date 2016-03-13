@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.baidu.speech.VoiceRecognitionService;
+import com.corel.android.BaseButterKnifeActivity;
 import com.corel.android.R;
 
 import org.json.JSONArray;
@@ -24,17 +25,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import butterknife.Bind;
+
 /**
  * Created by weilikai01 on 2015/5/12.
  */
-public class ActivityTouch extends Activity implements RecognitionListener {
+public class ActivityTouch extends BaseButterKnifeActivity implements RecognitionListener {
     private static final String TAG = "Touch";
     private static final int EVENT_ERROR = 11;
-    private TextView txtResult;
-    private TextView txtLog;
-    private Button btn;
-    private Button setting;
-
+    @Bind(R.id.txtResult) TextView txtResult;
+    @Bind(R.id.txtLog) TextView txtLog;
+    @Bind(R.id.btn) Button btn;
+    @Bind(R.id.setting) Button setting;
     View speechTips;
 
     View speechWave;
@@ -45,10 +47,6 @@ public class ActivityTouch extends Activity implements RecognitionListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sdk2_api);
-        txtResult = (TextView) findViewById(R.id.txtResult);
-        txtLog = (TextView) findViewById(R.id.txtLog);
-        btn = (Button) findViewById(R.id.btn);
-        setting = (Button) findViewById(R.id.setting);
         setting.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.inject.Singleton;
+
+@Singleton
 public class PinYinGestureService implements IPinYinGestureService {
 
 	private static final String TAG = "PinYinGestureService";

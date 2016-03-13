@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.baidu.speech.VoiceRecognitionService;
+import com.corel.android.BaseButterKnifeActivity;
 import com.corel.android.R;
 
 import org.json.JSONArray;
@@ -27,7 +28,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ApiActivity extends Activity implements RecognitionListener {
+public class ApiActivity extends BaseButterKnifeActivity implements RecognitionListener {
     private static final String TAG = "Sdk2Api";
     private static final int REQUEST_UI = 1;
     @Bind(R.id.txtLog) TextView txtLog;
@@ -49,7 +50,6 @@ public class ApiActivity extends Activity implements RecognitionListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sdk2_api);
-        ButterKnife.bind(this);
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this, new ComponentName(this, VoiceRecognitionService.class));
 
         speechRecognizer.setRecognitionListener(this);

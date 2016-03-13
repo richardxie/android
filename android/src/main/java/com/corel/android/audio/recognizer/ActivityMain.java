@@ -66,13 +66,13 @@ public class ActivityMain extends PreferenceActivity {
                         }
                 );
     }
+    // Retrofit section start from here...
+    // create an adapter for retrofit with base url
 
     private static Observable<ResponseData> translateObservable() {
         return Observable.defer(new Func0<Observable<ResponseData>>() {
             @Override
             public Observable<ResponseData> call() {
-                // Retrofit section start from here...
-                // create an adapter for retrofit with base url
                 RestAdapter restAdapter = new RestAdapter.Builder()
                         .setEndpoint(com.corel.android.Constant.TRANSLATE_SERVICE_URL)
                         .setLogLevel(RestAdapter.LogLevel.FULL)

@@ -91,6 +91,7 @@
              <!--</intent-filter>-->
         </activity>
         <activity android:name=".game.GuessGame" />
+        <service android:name=".pinyin.PinyinService" />
     </application>
 
 </manifest>
