@@ -26,6 +26,9 @@ model {
         moduleName = "opencv"
     }
 
+    android.lintOptions {
+        abortOnError = false
+    }
     android.sources {
         main {
             jni {

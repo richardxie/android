@@ -4,17 +4,20 @@
     <string name="hello">Hello andorid!</string>
     <string name="app_name">学汉字</string>
     <string name="button">Button</string>
+    <string name="opencv">图像处理</string>
 
     <!-- Noun, menu item used to demo Gesture -->
-    <string name="gesture">Gesture</string>
+    <string name="gesture">手势</string>
     <string name="openGL">OpenGL</string>
-     <string name="audio">Audio</string>
+    <string name="audio">语音处理</string>
+    <string name="audioRecognizer">语音识别</string>
+    <string name="audioTTS">语音合成</string>
     <!-- Noun, menu item used to demo Paint -->
-	<string name="paint">Paint</string>
+    <string name="paint">Paint</string>
     <string name="gestures_loading">Loading gestures</string>
     <!-- Message displayed when the user has no gestures -->
     <string name="gestures_empty">No gestures</string>
-     <string name="pinyin_empty">No pinyin</string>
+    <string name="pinyin_empty">No pinyin</string>
 
     <!-- Noun, menu item used to rename a gesture -->
     <string name="gestures_rename">Rename</string>
@@ -70,10 +73,14 @@
     <string name="select_dialog">Header title</string>
     <string name="alert_dialog_hide">Hide</string>
     <string name="alert_dialog_cancel">Cancel</string>
-    
+
     <string name="reading">I write, you read</string>
     <string name="writing">I read, you write</string>
 
+    <!-- opencv 图像处理 -->
+    <string name="tutorial1">教程1</string>
+    <string name="tutorial2">教程2</string>
+    <string name="tutorial3">教程3</string>
 
     <!-- 百度语音 -->
     <string name="please_speak">请说话</string>

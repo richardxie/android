@@ -8,32 +8,24 @@
         android:id="@+id/tv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:text="@string/opencv" />
 
     <Button
-        android:id="@android:id/button1"
+        android:id="@+id/tutorial1Btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/opencv"
-        android:onClick="clicked"/>
+        android:text="@string/tutorial1"/>
     
     <Button
-        android:id="@android:id/button2"
+        android:id="@+id/tutorial2Btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/gesture"
-        android:onClick="clicked"/>
+        android:text="@string/tutorial2"/>
 
     <Button
-        android:id="@android:id/button3"
+        android:id="@+id/tutorial3Btn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/audio"
-        android:onClick="clicked"/>
-
-    <WebView
-        android:id="@+id/webview"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:text="@string/tutorial3"/>
 
 </LinearLayout>

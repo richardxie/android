@@ -1,101 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.corel.android" >
+    package="com.corel.android">
 
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    >
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".HelloAndroidApplication"
         android:icon="@drawable/icon"
-        android:label="@string/app_name"
-        android:name=".HelloAndroidApplication">
+        android:label="@string/app_name">
+        <meta-data
+            android:name="com.baidu.speech.APP_ID"
+            android:value="7835409" />
+        <meta-data
+            android:name="com.baidu.speech.API_KEY"
+            android:value="0Ne6SkI7vqAPO3S2CNlXWnMc" />
+        <meta-data
+            android:name="com.baidu.speech.SECRET_KEY"
+            android:value="bc6cad9d7514a4a7239df377f0e86c0f" />
+        <meta-data
+            android:name="com.baidu.apiStore.API_KEY"
+            android:value="467fe77c025e833dbfc226e45b5afc1b" />
 
-        <meta-data android:name="com.baidu.speech.APP_ID" android:value="7835409"/>
-        <meta-data android:name="com.baidu.speech.API_KEY" android:value="0Ne6SkI7vqAPO3S2CNlXWnMc"/>
-        <meta-data android:name="com.baidu.speech.SECRET_KEY" android:value="bc6cad9d7514a4a7239df377f0e86c0f"/>
-        <meta-data android:name="com.baidu.apiStore.API_KEY" android:value="467fe77c025e833dbfc226e45b5afc1b"/>
-        <service android:name="com.baidu.speech.VoiceRecognitionService" android:exported="false" />
+        <service
+            android:name="com.baidu.speech.VoiceRecognitionService"
+            android:exported="false" />
+
         <activity
             android:name="com.baidu.voicerecognition.android.ui.BaiduASRDigitalDialog"
             android:configChanges="orientation|keyboardHidden|screenLayout"
-            android:theme="@android:style/Theme.Dialog"
             android:exported="false"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="com.baidu.action.RECOGNIZE_SPEECH" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".audio.recognizer.ActivityMain"
+            android:configChanges="orientation|keyboardHidden|screenLayout"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Light">
 
-        <activity
-            android:name="com.corel.android.audio.recognizer.ActivityMain"
-            android:configChanges="orientation|keyboardHidden|screenLayout"
-            android:theme="@android:style/Theme.DeviceDefault.Light"
-            android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name="com.corel.android.audio.recognizer.ApiActivity"
+            android:name=".audio.recognizer.ApiActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout"
-            android:theme="@android:style/Theme.DeviceDefault.Light"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Light"></activity>
         <activity
-            android:name="com.corel.android.audio.recognizer.ActivityTouch"
+            android:name=".audio.recognizer.ActivityTouch"
             android:configChanges="orientation|keyboardHidden|screenLayout"
-            android:theme="@android:style/Theme.DeviceDefault.Light"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Light"></activity>
         <activity
-            android:name="com.corel.android.audio.recognizer.Setting"
+            android:name=".audio.recognizer.Setting"
+            android:configChanges="orientation|keyboardHidden|screenLayout"
             android:label="设置"
-            android:configChanges="orientation|keyboardHidden|screenLayout"
-            android:theme="@android:style/Theme.DeviceDefault.Light"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.DeviceDefault.Light">
             <intent-filter>
                 <action android:name="com.baidu.speech.asr.demo.setting" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".audio.AudioMainActivity"/>
         <activity android:name=".audio.tts.MainActivity" />
         <activity android:name=".audio.tts.ModelManagerActivity" />
-
-        <activity android:name=".HelloAndroidActivity" >
+        <activity android:name=".HelloAndroidActivity">
             <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".gesture.CreateGestureActivity" />
         <activity android:name=".gesture.AddGestureActivity" />
-        <activity android:name=".audio.AddAudioActivity" >
-             <!--<intent-filter>-->
-                 <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity android:name=".audio.AddAudioActivity">
 
-                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
-             <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".game.GuessGame" />
-        <activity
-            android:name=".opencv.Tutorial1Activity" />
+        <activity android:name=".opencv.Tutorial1Activity" />
+        <activity android:name=".opencv.Tutorial2Activity" />
+        <activity android:name=".opencv.Tutorial3Activity" />
+
         <service android:name=".pinyin.PinyinService" />
+
+        <activity android:name=".opencv.TutorialMainActivity"></activity>
     </application>
 
 </manifest>

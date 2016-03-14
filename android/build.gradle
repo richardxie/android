@@ -56,12 +56,15 @@ android {
     lintOptions {
         abortOnError false
     }
+
+
     sourceSets {
         // Move the tests to tests/java, tests/res, etc...
+        main {
+            jni.srcDirs = []
+        }
         instrumentTest.setRoot('tests')
     }
-	
-	
 
 }
 
