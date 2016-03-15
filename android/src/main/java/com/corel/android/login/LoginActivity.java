@@ -29,9 +29,9 @@ public class LoginActivity extends BaseButterKnifeActivity {
                 "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                         + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         final Pattern telRegexPattern = Pattern.compile("^13\\d{9}|14[57]\\d{8}|15[012356789]\\d{8}|18[01256789]\\d{8}|17[0678]\\d{8}$");
-        Observable<Boolean> userNameValid = RxTextView.textChanges(loginName).distinctUntilChanged()
-                .map(t -> emailPattern.matcher(t).matches());
-        Observable<Boolean> passwordValid = RxTextView.textChanges(password).distinctUntilChanged()
+        Observable<Boolean> userNameValid = RxTextView.textChanges(loginName)
+                .map(t -> telRegexPattern.matcher(t).matches());
+        Observable<Boolean> passwordValid = RxTextView.textChanges(password)
                 .map(t -> t.length() > 6);
 
         userNameValid.doOnNext(b -> Log.d("[Rx]", "loginName " + (b ? "Valid" : "Invalid")))

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -14,10 +16,21 @@ import android.widget.Toast;
 import com.corel.android.BaseButterKnifeActivity;
 import com.corel.android.HelloAndroidApplication;
 import com.corel.android.R;
+import com.jakewharton.rxbinding.view.RxView;
+import com.jakewharton.rxbinding.widget.RxTextView;
+
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.OnClick;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.android.schedulers.HandlerScheduler;
+import rx.functions.Func0;
+import rx.schedulers.Schedulers;
 
 public class AddGestureActivity extends BaseButterKnifeActivity {
 	private static final float LENGTH_THRESHOLD = 1.0f;
@@ -49,6 +62,38 @@ public class AddGestureActivity extends BaseButterKnifeActivity {
         ((HelloAndroidApplication) getApplication()).inject(this);
         overlay.setGestureStrokeType(GestureOverlayView.GESTURE_STROKE_TYPE_MULTIPLE);
         overlay.addOnGestureListener(new GesturesProcessor());
+
+       // RxView.
+        Observable o2 = RxView.clickEvents(mDoneButton).throttleFirst(10, TimeUnit.SECONDS);
+
+
+        o2.subscribe((e) -> {
+                     Log.d("Demo", "clicked:" + e);
+                     gestureObservable().subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<Integer>() {
+
+                        @Override
+                        public void onCompleted() {
+                            Log.d("Demo", "onCompleted!");
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.e("Ops! Error: ", "Rx Did it again!", e);
+                        }
+
+                        @Override
+                        public void onNext(Integer result) {
+                            Log.d("Demo", "onNext!");
+                            setResult(result);
+                            if(result == RESULT_OK) {
+                                Toast.makeText(AddGestureActivity.this, R.string.save_success, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+        });
     }
 
     @Override
@@ -76,12 +121,12 @@ public class AddGestureActivity extends BaseButterKnifeActivity {
         }
     }
 
-    public void addGesture(View v) {
+    /*@OnClick(R.id.done)*/
+    public void addGesture() {
         if (mGesture != null) {
-            final TextView input = (TextView) findViewById(R.id.gesture_name);
-            final CharSequence name = input.getText();
+            final CharSequence name = mGestureName.getText();
             if (name.length() == 0) {
-                input.setError(getString(R.string.error_missing_name));
+                mGestureName.setError(getString(R.string.error_missing_name));
                 return;
             }
 
@@ -97,12 +142,30 @@ public class AddGestureActivity extends BaseButterKnifeActivity {
 
         finish();
     }
-    
+
+    private Observable<Integer> gestureObservable() {
+        return Observable.defer(new Func0<Observable<Integer>>() {
+            @Override
+            public Observable<Integer> call() {
+                Integer result = RESULT_OK;
+                if (mGesture != null) {
+                    mGestureService.addGesture(name.toString(), mGesture);
+                    mGestureService.save();
+                } else {
+                    result = RESULT_CANCELED;
+                }
+                return Observable.just(result);
+            }
+        });
+    }
+
+    @OnClick(R.id.discardGestureBtn)
     public void cancelGesture(View v) {
         setResult(RESULT_CANCELED);
         finish();
     }
-    
+
+    @OnClick(R.id.earseGestureBtn)
     public void earseGesture(View v) {
     	 if (mGesture != null) {
     		 overlay.clear(true);
@@ -135,6 +198,5 @@ public class AddGestureActivity extends BaseButterKnifeActivity {
     @Bind(R.id.gesture_name) EditText mGestureName;
     private String name;
     @Inject IPinYinGestureService mGestureService;
-    
     private Gesture mGesture;
 }

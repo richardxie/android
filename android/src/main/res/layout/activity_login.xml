@@ -8,6 +8,16 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
+        android:gravity="center">
+
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/icon_recommended_prize"/>
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/ll_login_content_show"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

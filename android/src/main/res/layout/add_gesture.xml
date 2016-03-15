@@ -69,26 +69,21 @@
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-
             android:enabled="false"
-
-            android:onClick="addGesture"
             android:text="@string/button_done" />
     
          <Button
+             android:id="@+id/earseGestureBtn"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            
-            android:onClick="earseGesture"
             android:text="@string/button_earse" />
          
         <Button
+            android:id="@+id/discardGestureBtn"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            
-            android:onClick="cancelGesture"
             android:text="@string/button_discard" />
     
     </LinearLayout>
