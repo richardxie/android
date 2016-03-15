@@ -14,22 +14,19 @@
         android:id="@android:id/button1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/opencv"
-        android:onClick="clicked"/>
+        android:text="@string/opencv"/>
     
     <Button
         android:id="@android:id/button2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/gesture"
-        android:onClick="clicked"/>
+        android:text="@string/gesture"/>
 
     <Button
         android:id="@android:id/button3"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/audio"
-        android:onClick="clicked"/>
+        android:text="@string/audio"/>
 
     <WebView
         android:id="@+id/webview"

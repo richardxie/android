@@ -153,4 +153,21 @@
         <item>100021, 命令词</item>
     </string-array>
 
+    <!-- 登录 -->
+    <string name="login_activity_title">登录</string>
+    <string name="login_activity_account">帐号</string>
+    <string name="login_activity_pwd">密码</string>
+    <string name="login_activity_button_login">登录</string>
+    <string name="login_activity_button_register">注册</string>
+    <string name="login_activity_edittext_username">请输入您的手机号</string>
+    <string name="login_activity_edittext_pwd">请输入您的登录密码</string>
+    <string name="login_activity_text_forget_pwd">忘记密码?</string>
+    <string name="login_activity_toast_enter_username">请先输入您的手机号</string>
+    <string name="login_activity_toast_enter_password">请先输入您的登录密码</string>
+    <string name="login_activity_toast_error_password">请输入8~16位字母和数字的组合</string>
+    <string name="login_activity_toast_error_username">请输入正确的手机号</string>
+    <string name="login_activity_toast_success">登录成功</string>
+    <string name="login_activity_toast_failed">登录失败</string>
+    <string name="login_activity_toast_failed_freeze">该用户已被冻结,请联系管理员！</string>
+
 </resources>

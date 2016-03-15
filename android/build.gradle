@@ -82,6 +82,7 @@ dependencies {
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile "io.reactivex:rxjava:${rootProject.ext.rxJavaVersion}"
     compile "io.reactivex:rxandroid:${rootProject.ext.rxAndroidVersion}"
+    compile "com.jakewharton.rxbinding:rxbinding:${rootProject.ext.rxBindingVersion}"
 
     compile "com.android.support:support-v4:${rootProject.ext.supportV4}"
 	

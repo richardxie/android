@@ -28,6 +28,7 @@ import com.corel.android.audio.AudioMainActivity;
 import com.corel.android.audio.recognizer.ActivityMain;
 import com.corel.android.audio.tts.MainActivity;
 import com.corel.android.gesture.CreateGestureActivity;
+import com.corel.android.login.LoginActivity;
 import com.corel.android.opencv.Tutorial2Activity;
 import com.corel.android.opencv.TutorialMainActivity;
 import com.corel.android.pinyin.PinYin;
@@ -46,6 +47,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HelloAndroidActivity extends SherlockFragmentActivity implements SearchView.OnQueryTextListener,
 		SearchView.OnSuggestionListener{
@@ -99,6 +101,7 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
         menu.setMenu(R.layout.sliding_menu_frame);
 	}
 
+	@OnClick({android.R.id.button1, android.R.id.button2, android.R.id.button3})
 	public void clicked(View v) {
 		if(v.getId() == android.R.id.button1) {
 			javaScript.clickOnAndroid();
@@ -167,7 +170,7 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
 
 		switch (item.getItemId()) {
 			case 1:
-				Intent intent = new Intent(this, ActivityMain.class);
+				Intent intent = new Intent(this, LoginActivity.class);
 				startActivity(intent);
 				break;
 		}

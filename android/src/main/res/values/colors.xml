@@ -4,4 +4,15 @@
     <color name="header_btn_backgroud_press_color">#ff053e58</color>
     <color name="lightgrey">#ff888888</color>
     <color name="nav_page">#FFE1E8EB</color>
+    <color name="org_button">#f6a41d</color>
+    <color name="org_button_down">#EC870E</color>
+    <color name="gray_common_background">#f0f0f0</color>
+    <color name="white">#ffffffff</color>
+    <color name="nocolor">#00000000</color>
+    <color name="red">#d52b2a</color>
+    <color name="theme_red">#ff7460</color>
+    <color name="line_bg_cccccc">#d4d4d4</color>
+
+    <color name="black_normal_text">#767676</color>
+    <color name="black_small_text">#a2a2a2</color>
 </resources>

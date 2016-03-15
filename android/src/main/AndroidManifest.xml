@@ -110,6 +110,7 @@
         <service android:name=".pinyin.PinyinService" />
 
         <activity android:name=".opencv.TutorialMainActivity"></activity>
+        <activity android:name=".login.LoginActivity"/>
     </application>
 
 </manifest>
