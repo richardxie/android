@@ -52,7 +52,7 @@
             android:name=".audio.recognizer.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.DeviceDefault.Light">
+            android:theme="@style/Theme.AppCompat.Light">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -63,36 +63,48 @@
             android:name=".audio.recognizer.ApiActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.DeviceDefault.Light"></activity>
+            android:theme="@style/Theme.AppCompat.Light"></activity>
+
         <activity
             android:name=".audio.recognizer.ActivityTouch"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.DeviceDefault.Light"></activity>
+            android:theme="@style/Theme.AppCompat.Light"></activity>
+
         <activity
             android:name=".audio.recognizer.Setting"
             android:configChanges="orientation|keyboardHidden|screenLayout"
             android:label="设置"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.DeviceDefault.Light">
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="com.baidu.speech.asr.demo.setting" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".audio.AudioMainActivity"/>
+
+        <activity android:name=".audio.AudioMainActivity"
+            android:theme="@style/Theme.AppCompat.Light"/>
+
         <activity android:name=".audio.tts.MainActivity" />
+
         <activity android:name=".audio.tts.ModelManagerActivity" />
-        <activity android:name=".HelloAndroidActivity">
+        <activity android:name=".HelloAndroidActivity"
+            android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gesture.CreateGestureActivity" />
-        <activity android:name=".gesture.AddGestureActivity" />
+
+        <activity android:name=".gesture.CreateGestureActivity"
+            android:theme="@style/Theme.AppCompat"/>
+
+        <activity android:name=".gesture.AddGestureActivity"
+            android:theme="@style/Theme.AppCompat"/>
+
         <activity android:name=".audio.AddAudioActivity">
 
             <!-- <intent-filter> -->
@@ -109,7 +121,8 @@
 
         <service android:name=".pinyin.PinyinService" />
 
-        <activity android:name=".opencv.TutorialMainActivity"></activity>
+        <activity android:name=".opencv.TutorialMainActivity"
+            android:theme="@style/Theme.AppCompat.Light"></activity>
         <activity android:name=".login.LoginActivity"/>
     </application>
 

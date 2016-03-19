@@ -79,12 +79,15 @@ dependencies {
     apt "com.squareup.dagger:dagger-compiler:${rootProject.ext.daggerCompilerVersion}"
     provided "javax.annotation:jsr250-api:${rootProject.ext.jsr250Version}"
 
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile "io.reactivex:rxjava:${rootProject.ext.rxJavaVersion}"
     compile "io.reactivex:rxandroid:${rootProject.ext.rxAndroidVersion}"
     compile "com.jakewharton.rxbinding:rxbinding:${rootProject.ext.rxBindingVersion}"
+    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${rootProject.ext.rxBindingVersion}"
+    compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${rootProject.ext.rxBindingVersion}"
 
     compile "com.android.support:support-v4:${rootProject.ext.supportV4}"
+    compile "com.android.support:appcompat-v7:${rootProject.ext.appcompatVersion}"
+    compile "com.android.support:recyclerview-v7:${rootProject.ext.recyclerViewVersion}"
 	
     compile 'org.apache.commons:commons-lang3:3.1'
     compile 'com.loopj.android:android-async-http:1.4.4'

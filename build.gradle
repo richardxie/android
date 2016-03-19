@@ -1,17 +1,17 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 ext {
-    compileSdkVersion = 22
+    compileSdkVersion = 23
     minSdkVersion = 15
-    targetSdkVersion = 22
+    targetSdkVersion = 23
 
     androidGradleVersion = '2.0.0-beta6'
     androidGradleExperimentalVersion = '0.6.0-beta6'
-    buildToolsVersion = '22.0.1'
+    buildToolsVersion = '23.0.1'
     retroLambdaVersion = '3.1.0'
     okhttpVersion = '2.3.0'
     rxJavaVersion = '1.1.0'
     rxAndroidVersion = '1.1.0'
-    rxBindingVersion = '0.2.0'
+    rxBindingVersion = '0.4.0'
     javaxAnnotationVersion = '10.0-b28'
 
     butterKnifeVersion = '7.0.1'
@@ -20,15 +20,15 @@ ext {
     androidAptVersion = '1.4+'
     jsr250Version = '1.0'
 
-    supportAnnotationsVersion = '22.2.0'
-    supportDesignVersion = '22.2.0'
+    supportAnnotationsVersion = '23.1.0'
+    supportDesignVersion = '23.1.0'
 
-    supportV4 = '22.2.0'
-    supportV13 = '22.2.0'
-    appcompatVersion = '22.2.0'
-    cardViewVersion = '22.2.0'
-    recyclerViewVersion = '22.2.0'
-    paletteVersion = '22.2.0'
+    supportV4 = '23.1.0'
+    supportV13 = '23.1.0'
+    appcompatVersion = '23.1.0'
+    cardViewVersion = '23.1.0'
+    recyclerViewVersion = '23.1.0'
+    paletteVersion = '23.1.0'
 
     guavaVersion = '18.0'
     lombokVersion = '1.16.6'

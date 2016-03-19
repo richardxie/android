@@ -8,6 +8,7 @@ import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.BaseColumns;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,11 +20,6 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
-import com.actionbarsherlock.widget.SearchView;
 import com.corel.android.audio.AudioMainActivity;
 import com.corel.android.audio.recognizer.ActivityMain;
 import com.corel.android.audio.tts.MainActivity;
@@ -49,8 +45,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HelloAndroidActivity extends SherlockFragmentActivity implements SearchView.OnQueryTextListener,
-		SearchView.OnSuggestionListener{
+public class HelloAndroidActivity extends BaseButterKnifeActivity /*implements SearchView.OnQueryTextListener,
+		SearchView.OnSuggestionListener*/{
 
 	private static String TAG = "andorid";
 
@@ -60,7 +56,7 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
             BaseColumns._ID,
             SearchManager.SUGGEST_COLUMN_TEXT_1,
     };
-    private SuggestionsAdapter mSuggestionsAdapter;
+    //private SuggestionsAdapter mSuggestionsAdapter;
     /**
 	 * Called when the activity is first created.
 	 * 
@@ -72,10 +68,9 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.Theme_Sherlock_Light);
+       // setTheme(R.style.Theme_Sherlock_Light);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		ButterKnife.bind(this);
 		Log.i(TAG, "onCreate");
 		tv.setText("ButterKnife/Dagger workable!");
 		WebSettings webSettings = webView.getSettings();
@@ -118,6 +113,11 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
             //String words = getWords(this, 1);
 			ArrayList<PinYin> words = Lists.newArrayList();
 			words.add(new PinYin("好", "good", "hao"));
+			words.add(new PinYin("人","people","ren"));
+			words.add(new PinYin("一","one","yi"));
+			words.add(new PinYin("生","live","sheng"));
+			words.add(new PinYin("平","plain","ping"));
+			words.add(new PinYin("安","safe","an"));
 			intent.putParcelableArrayListExtra("Words", words);
             intent.putExtra("CardId", 1);
 			startActivity(intent);
@@ -128,7 +128,7 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
 		}
 	}
 
-	@Override
+	/*@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		//Used to put dark icons on light action bar
 		boolean isLight = true;
@@ -216,7 +216,7 @@ public class HelloAndroidActivity extends SherlockFragmentActivity implements Se
             final int textIndex = cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1);
             tv.setText(cursor.getString(textIndex));
         }
-    }
+    }*/
 
     class JavaScriptInterface {
 		Context mContext;

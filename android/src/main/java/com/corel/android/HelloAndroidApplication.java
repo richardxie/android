@@ -23,8 +23,7 @@ public class HelloAndroidApplication extends Application {
 
     protected List<Object> getModules() {
         return Arrays.asList(
-                new AndroidModule(this),
-                new PinYinModule()
+                new AndroidModule(this)
         );
     }
 

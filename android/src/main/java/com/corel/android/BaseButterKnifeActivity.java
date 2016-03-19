@@ -1,7 +1,6 @@
 package com.corel.android;
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import butterknife.ButterKnife;
@@ -9,7 +8,8 @@ import butterknife.ButterKnife;
 /**
  * Created by 强 on 3/11 0011.
  */
-public class BaseButterKnifeActivity extends Activity {
+public class BaseButterKnifeActivity extends AppCompatActivity {
+
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);

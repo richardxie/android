@@ -6,6 +6,11 @@ import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
 
+import com.corel.android.audio.AddAudioActivity;
+import com.corel.android.gesture.AddGestureActivity;
+import com.corel.android.gesture.CreateGestureActivity;
+import com.corel.android.pinyin.PinYinModule;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -16,7 +21,16 @@ import static android.content.Context.LOCATION_SERVICE;
 /**
  * Created by 强 on 3/8 0008.
  */
-@Module(library = true)
+@Module(
+        includes = {
+                PinYinModule.class
+        },
+        injects = {
+                CreateGestureActivity.class,
+                AddGestureActivity.class
+        },
+        library = true
+)
 public class AndroidModule {
     private final HelloAndroidApplication application;
 

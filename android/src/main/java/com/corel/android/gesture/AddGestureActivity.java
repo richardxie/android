@@ -51,8 +51,8 @@ public class AddGestureActivity extends BaseButterKnifeActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_gesture);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,
-                WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
+       // getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,
+        //        WindowManager.LayoutParams.FLAG_BLUR_BEHIND);
         
     	setTitle("Add a Gesture");
         name = getIntent().getStringExtra(CreateGestureActivity.GESTURES_NAME);
@@ -64,7 +64,7 @@ public class AddGestureActivity extends BaseButterKnifeActivity {
         overlay.addOnGestureListener(new GesturesProcessor());
 
        // RxView.
-        Observable o2 = RxView.clickEvents(mDoneButton).throttleFirst(10, TimeUnit.SECONDS);
+        Observable o2 = RxView.clicks(mDoneButton).throttleFirst(10, TimeUnit.SECONDS);
 
 
         o2.subscribe((e) -> {
@@ -147,6 +147,7 @@ public class AddGestureActivity extends BaseButterKnifeActivity {
         return Observable.defer(new Func0<Observable<Integer>>() {
             @Override
             public Observable<Integer> call() {
+                mGestureService.load(1);
                 Integer result = RESULT_OK;
                 if (mGesture != null) {
                     mGestureService.addGesture(name.toString(), mGesture);
