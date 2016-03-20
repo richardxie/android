@@ -2,6 +2,7 @@ package com.corel.android.audio;
 
 import android.app.Activity;
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.corel.android.BaseButterKnifeActivity;
+import com.corel.android.HelloAndroidApplication;
 import com.corel.android.R;
 
 import java.io.File;
@@ -23,13 +26,14 @@ import javax.inject.Named;
 
 import butterknife.Bind;
 
-public class AddAudioActivity extends Activity {
+public class AddAudioActivity extends BaseButterKnifeActivity {
 
 	private enum State { IDLE, RECORDING};
 	public static final int UPDATE = 1;
 	
 	@Inject @Named("PCM") IAudioRecorder mRecorder;
-	@Inject @Named("PCM") String prefix;
+	//@Inject @Named("PCM")
+	String prefix = ".wav";
 	private MediaPlayer mPlayer;
 	
 	private int mDuration;
@@ -53,10 +57,12 @@ public class AddAudioActivity extends Activity {
 		if (mAudioName == null)
 			mAudioName = "good";
 		mAudioNameTV.setText(mAudioName);
+		((HelloAndroidApplication) getApplication()).inject(this);
 		mRecorder.configue(MediaRecorder.AudioSource.MIC,
 					16000,
 					AudioFormat.CHANNEL_CONFIGURATION_MONO,
 					AudioFormat.ENCODING_PCM_16BIT);
+		mAudioService.load(1);
 		
 	}
 	
@@ -73,8 +79,11 @@ public class AddAudioActivity extends Activity {
 	}
 	
 	public void play(View view) {
-		if(mPlayer == null)
+		if(mPlayer == null) {
 			mPlayer = new MediaPlayer();
+			mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+		}
+
 		
 		mPlayer.reset();
 		String fileName = mAudioNameTV.getText().toString()+ prefix;
@@ -144,7 +153,7 @@ public class AddAudioActivity extends Activity {
 		protected String doInBackground(String... params) {
 			try {
 				//mRecognizeService.convertAudioFormat("hao.wav", "haoEncode.flac");
-				word = mRecognizeService.getAudioRecognize("PinYin/test.flac");
+				word = "hao";//mRecognizeService.getAudioRecognize("PinYin/test.flac");
 				mPlayer.setDataSource(params[0]);
 				mPlayer.prepare();
 			} catch (IllegalArgumentException e) {
@@ -181,8 +190,8 @@ public class AddAudioActivity extends Activity {
 	
 	@Bind(R.id.word) TextView mWord;
 	
-	@Inject
-	IAudioRecognizeService mRecognizeService;
+	//@Inject
+	//IAudioRecognizeService mRecognizeService;
 	
 	@Inject
 	IPinYinAudioService mAudioService;

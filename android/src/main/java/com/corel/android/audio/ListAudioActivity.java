@@ -37,12 +37,9 @@ public class ListAudioActivity extends ListActivity {
 	
 	private ArrayAdapter<String> adapter;
 	private String currentAudio;
-	
 
 	private static final int REQUEST_NEW_AUDIO = 1;
 	private static final int DIALOG_RENAME_AUDIO = 1;
-	private TextView input;
-	private SharedPreferences settings;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,7 +52,7 @@ public class ListAudioActivity extends ListActivity {
 		
 		settings = getSharedPreferences("Settings", MODE_PRIVATE);
 		if(settings != null) {
-			//int card = settings.getInt("card", 1);
+			int card = settings.getInt("card", 1);
 			//mAudioService.setAudioPath(this, card);
 		}
 		loadAudio();
@@ -235,4 +232,8 @@ public class ListAudioActivity extends ListActivity {
 	@Bind(android.R.id.empty) TextView empty;
 	
 	@Inject IPinYinAudioService mAudioService;
+
+	@Bind(R.id.name) TextView input;
+
+	@Inject SharedPreferences settings;
 }

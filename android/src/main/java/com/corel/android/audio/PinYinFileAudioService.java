@@ -1,7 +1,10 @@
 package com.corel.android.audio;
 
+import android.annotation.TargetApi;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
@@ -206,12 +209,41 @@ public class PinYinFileAudioService implements IPinYinAudioService, IAudioRecogn
 			listener.load(event);
 		}
 	}
+
+	private SoundPool createSoundPool() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			createNewSoundPool();
+		}else{
+			createOldSoundPool();
+		}
+
+		return mSoundPool;
+	}
+
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	protected void createNewSoundPool(){
+		AudioAttributes attributes = new AudioAttributes.Builder()
+				.setUsage(AudioAttributes.USAGE_GAME)
+				.setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+				.build();
+		mSoundPool = new SoundPool.Builder()
+				.setAudioAttributes(attributes)
+				.build();
+	}
+	@SuppressWarnings("deprecation")
+	protected void createOldSoundPool(){
+		mSoundPool = new SoundPool(SOUND_NUM_IN_ONECARD, AudioManager.STREAM_MUSIC, 0);
+	}
 	
 	public final static File mSoundFolder = new File(Environment.getExternalStorageDirectory(), "PinYin/sounds");
 	private int mCardNumber;
 	private int mCurrentSoundID;
 	private CopyOnWriteArrayList<PinYinAudioLoaderListener>  mListeners = new CopyOnWriteArrayList<PinYinAudioLoaderListener>();
-	private SoundPool mSoundPool = new SoundPool(SOUND_NUM_IN_ONECARD, AudioManager.STREAM_MUSIC, 0);
+	private SoundPool mSoundPool;
+	{
+		createSoundPool();
+	}
+
 	private HashMap<String, Integer> mSoundMap = new HashMap<String, Integer>();
 	private FutureTask<SoundPool> mTask;
 	

@@ -209,7 +209,7 @@ public class PinyinService extends Service implements IPinYinService{
 	@Override
 	public void release() {
 		mDB.close();
-		notification.setLatestEventInfo(this, "拼音服务", "拼音负责完成", contentIntent);
+		//notification.setLatestEventInfo(this, "拼音服务", "拼音负责完成", contentIntent);
 		contentIntent.cancel();
 	}
 
@@ -246,7 +246,7 @@ public class PinyinService extends Service implements IPinYinService{
 				new Intent(this, CreateGestureActivity.class), 0);
 
 		// Set the info for the views that show in the notification panel.
-		notification.setLatestEventInfo(this, "拼音服务", text, contentIntent);
+		//notification.setLatestEventInfo(this, "拼音服务", text, contentIntent);
 
 		// Send the notification.
 		mNM.notify(NOTIFICATION, notification);

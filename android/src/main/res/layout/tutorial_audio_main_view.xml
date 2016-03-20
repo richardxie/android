@@ -11,6 +11,11 @@
         android:text="@string/audio" />
 
     <Button
+        android:id="@+id/audioListBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/audioList"/>
+    <Button
         android:id="@+id/recognizerBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

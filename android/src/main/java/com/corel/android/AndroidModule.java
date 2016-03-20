@@ -27,7 +27,8 @@ import static android.content.Context.LOCATION_SERVICE;
         },
         injects = {
                 CreateGestureActivity.class,
-                AddGestureActivity.class
+                AddGestureActivity.class,
+                AddAudioActivity.class
         },
         library = true
 )

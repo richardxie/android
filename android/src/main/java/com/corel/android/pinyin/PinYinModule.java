@@ -1,7 +1,10 @@
 package com.corel.android.pinyin;
 
 import com.corel.android.audio.AddAudioActivity;
+import com.corel.android.audio.ExtAudioRecorder;
+import com.corel.android.audio.FLACAudioRecorder;
 import com.corel.android.audio.IAudioRecognizeService;
+import com.corel.android.audio.IAudioRecorder;
 import com.corel.android.audio.IPinYinAudioService;
 import com.corel.android.audio.PinYinFileAudioService;
 import com.corel.android.dao.IPinYinDAO;
@@ -48,6 +51,15 @@ public class PinYinModule {
 
 	@Provides
 	IPinYinGestureService providePinYinGestureService() { return new PinYinGestureService(); }
+
+	@Provides
+	@Named("FLAC")
+	IAudioRecorder provideFLACAudioRecorder() { return new FLACAudioRecorder();}
+
+	@Provides
+	@Named("PCM")
+	IAudioRecorder providePCMAudioRecorder() { return ExtAudioRecorder.getInstanse(true);}
+
 //	@Override
 //	protected void configure() {
 //

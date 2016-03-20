@@ -12,6 +12,7 @@
     <string name="audio">语音处理</string>
     <string name="audioRecognizer">语音识别</string>
     <string name="audioTTS">语音合成</string>
+    <string name="audioList">语音列表</string>
     <!-- Noun, menu item used to demo Paint -->
     <string name="paint">Paint</string>
     <string name="gestures_loading">Loading gestures</string>

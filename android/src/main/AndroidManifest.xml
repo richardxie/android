@@ -48,6 +48,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".audio.recognizer.ActivityMain"
             android:configChanges="orientation|keyboardHidden|screenLayout"
@@ -59,6 +60,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
+
         <activity
             android:name=".audio.recognizer.ApiActivity"
             android:configChanges="orientation|keyboardHidden|screenLayout"
@@ -90,6 +92,7 @@
         <activity android:name=".audio.tts.MainActivity" />
 
         <activity android:name=".audio.tts.ModelManagerActivity" />
+
         <activity android:name=".HelloAndroidActivity"
             android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
@@ -105,7 +108,11 @@
         <activity android:name=".gesture.AddGestureActivity"
             android:theme="@style/Theme.AppCompat"/>
 
-        <activity android:name=".audio.AddAudioActivity">
+        <activity android:name=".audio.ListAudioActivity"
+            android:theme="@style/Theme.AppCompat"/>
+
+        <activity android:name=".audio.AddAudioActivity"
+            android:theme="@style/Theme.AppCompat">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
@@ -123,7 +130,9 @@
 
         <activity android:name=".opencv.TutorialMainActivity"
             android:theme="@style/Theme.AppCompat.Light"></activity>
-        <activity android:name=".login.LoginActivity"/>
+
+        <activity android:name=".login.LoginActivity"
+            android:theme="@style/Theme.AppCompat"/>
     </application>
 
 </manifest>

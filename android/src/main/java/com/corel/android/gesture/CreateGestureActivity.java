@@ -62,13 +62,6 @@ public class CreateGestureActivity extends BaseButterKnifeActivity {
 		mGestureService.load(1);
 	}
 
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		/*PinYin word;/// = (PinYin) getListView().getAdapter().getItem(position);
-		Intent intent = new Intent(this, AddGestureActivity.class);
-		intent.putExtra(GESTURES_NAME, word.getChinese());
-		startActivity(intent);*/
-	}
-	
 	//done Button
 	public void done(View v) {
 		finish();
@@ -85,7 +78,7 @@ public class CreateGestureActivity extends BaseButterKnifeActivity {
 	
 	public static final String GESTURES_NAME = "gesture.name";
 	
-	SharedPreferences settings =  null;
+	@Inject SharedPreferences settings =  null;
 
 	@Bind(R.id.recyclerView)
 	RecyclerView recyclerView;

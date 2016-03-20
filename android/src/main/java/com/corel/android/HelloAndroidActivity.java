@@ -14,11 +14,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.SearchView;
 
 import com.corel.android.audio.AudioMainActivity;
 import com.corel.android.audio.recognizer.ActivityMain;
@@ -45,8 +48,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HelloAndroidActivity extends BaseButterKnifeActivity /*implements SearchView.OnQueryTextListener,
-		SearchView.OnSuggestionListener*/{
+public class HelloAndroidActivity extends BaseButterKnifeActivity implements SearchView.OnQueryTextListener,
+		SearchView.OnSuggestionListener{
 
 	private static String TAG = "andorid";
 
@@ -56,7 +59,7 @@ public class HelloAndroidActivity extends BaseButterKnifeActivity /*implements S
             BaseColumns._ID,
             SearchManager.SUGGEST_COLUMN_TEXT_1,
     };
-    //private SuggestionsAdapter mSuggestionsAdapter;
+    private SuggestionsAdapter mSuggestionsAdapter;
     /**
 	 * Called when the activity is first created.
 	 * 
@@ -128,7 +131,7 @@ public class HelloAndroidActivity extends BaseButterKnifeActivity /*implements S
 		}
 	}
 
-	/*@Override
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		//Used to put dark icons on light action bar
 		boolean isLight = true;
@@ -150,7 +153,7 @@ public class HelloAndroidActivity extends BaseButterKnifeActivity /*implements S
 		searchView.setSuggestionsAdapter(mSuggestionsAdapter);
 
 		menu.add("Search")
-				.setIcon(isLight ? R.drawable.ic_search_inverse : R.drawable.abs__ic_search)
+				.setIcon(isLight ? R.drawable.ic_search_inverse : R.drawable.ic_search)
 				.setActionView(searchView)
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 
@@ -216,7 +219,7 @@ public class HelloAndroidActivity extends BaseButterKnifeActivity /*implements S
             final int textIndex = cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1);
             tv.setText(cursor.getString(textIndex));
         }
-    }*/
+    }
 
     class JavaScriptInterface {
 		Context mContext;

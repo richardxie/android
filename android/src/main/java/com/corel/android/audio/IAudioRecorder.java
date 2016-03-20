@@ -3,13 +3,13 @@ package com.corel.android.audio;
 
 public interface IAudioRecorder {
 	/**
-	 * INITIALIZING : recorder is initializing; READY : recorder has been
-	 * initialized, recorder not yet started RECORDING : recording ERROR :
-	 * reconstruction needed STOPPED: reset needed
+	 * INITIALIZING : recorder is initializing;
+	 * READY : recorder has been initialized, recorder not yet started
+	 * RECORDING : recording
+	 * ERROR : reconstruction needed
+	 * STOPPED: reset needed
 	 */
-	enum State {
-		INITIALIZING, READY, RECORDING, ERROR, STOPPED
-	};
+	public enum State {INITIALIZING, READY, RECORDING, ERROR, STOPPED};
 	
 	// The interval in which the recorded samples are output to the file
 	final int TIMER_INTERVAL = 120;

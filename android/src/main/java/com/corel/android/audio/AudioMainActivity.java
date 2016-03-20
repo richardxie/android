@@ -23,7 +23,7 @@ public class AudioMainActivity extends BaseButterKnifeActivity {
         setContentView(R.layout.tutorial_audio_main_view);
     }
 
-    @OnClick({R.id.recognizerBtn, R.id.ttsBtn}) void doIt(View v) {
+    @OnClick({R.id.recognizerBtn, R.id.ttsBtn, R.id.audioListBtn}) void doIt(View v) {
         switch (v.getId()) {
             case R.id.recognizerBtn: {
                 Intent intent = new Intent(this, ActivityMain.class);
@@ -32,6 +32,12 @@ public class AudioMainActivity extends BaseButterKnifeActivity {
                 break;
             case R.id.ttsBtn: {
                 Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+                break;
+            case R.id.audioListBtn: {
+                Intent intent = new Intent(this, AddAudioActivity.class);
+                intent.putExtra("name","好");
                 startActivity(intent);
             }
                 break;
