@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.gesture.Gesture;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Process;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -40,6 +43,16 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import com.corel.android.pinyin.ResponsePinyin;
+import com.corel.android.pinyin.service.PinyinAPI;
+
+import retrofit.RequestInterceptor;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.android.schedulers.HandlerScheduler;
+import rx.functions.Func0;
+import retrofit.RestAdapter;
+
 public class CreateGestureActivity extends BaseButterKnifeActivity {
 
 	public static final String TAG = "CreateGestureActivity";
@@ -63,6 +76,27 @@ public class CreateGestureActivity extends BaseButterKnifeActivity {
 		//RxRecyclerViewAdapter.dataChanges(adapter).
 		mGestureService.load(1);
 		mAudioService.load(1);
+
+		 BackgroundThread backgroundThread = new BackgroundThread();
+        backgroundThread.start();
+        backgroundHandler = new Handler(backgroundThread.getLooper());
+		for(PinYin word: mWords) {
+			pinyinObservable(word.getChinese()).subscribeOn(HandlerScheduler.from(backgroundHandler))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        (c) -> {
+                            Log.d("Demo", "onNext:" + c);
+                            Log.d("Demo", "pingyin for " + word + ":" + c);
+                            word.setPinyin(c.getPy());
+                        },
+                        (Throwable e) -> {
+                            Log.e("Ops! Error: ", "Rx Did it again!", e);
+                        },
+                        () -> {
+                            Log.d("Demo", "onCompleted!");
+                        }
+                );
+       	}
 	}
 
 	//done Button
@@ -93,6 +127,38 @@ public class CreateGestureActivity extends BaseButterKnifeActivity {
 
 	@Inject
 	IPinYinAudioService mAudioService;
+
+	private Handler backgroundHandler;
+
+	 private static class BackgroundThread extends HandlerThread {
+        BackgroundThread() {
+            super("SchedulerSample-BackgroundThread", Process.THREAD_PRIORITY_BACKGROUND);
+        }
+    }
+
+     private static Observable<ResponsePinyin> pinyinObservable(final String word) {
+        return Observable.defer(new Func0<Observable<ResponsePinyin>>() {
+            @Override
+            public Observable<ResponsePinyin> call() {
+                // Retrofit section start from here...
+                // create an adapter for retrofit with base url
+                RestAdapter restAdapter = new RestAdapter.Builder()
+                        .setEndpoint(com.corel.android.Constant.PINYIN_SERVICE_URL)
+                        .setLogLevel(RestAdapter.LogLevel.FULL)
+                        .setRequestInterceptor(new RequestInterceptor() {
+                            @Override
+                            public void intercept(RequestFacade request) {
+                                request.addHeader("apikey", com.corel.android.Constant.APPSTORE_KEY);
+                            }
+                        })
+                        .build();
+
+                // creating a service for adapter with our GET class
+                PinyinAPI demo = restAdapter.create(PinyinAPI.class);
+                return Observable.just(demo.topinyin(word, "1"));
+            }
+        });
+    }
 
 	public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ListItemViewHolder> {
 
