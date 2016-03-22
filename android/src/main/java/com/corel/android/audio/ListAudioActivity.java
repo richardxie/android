@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.corel.android.HelloAndroidApplication;
 import com.corel.android.R;
 
 import java.io.File;
@@ -28,6 +30,7 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 
 public class ListAudioActivity extends ListActivity {
@@ -44,6 +47,8 @@ public class ListAudioActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.audios_list);
+		ButterKnife.bind(this);
+		((HelloAndroidApplication) getApplication()).inject(this);
 		adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_list_item_1);
 		setListAdapter(adapter);
@@ -188,6 +193,8 @@ public class ListAudioActivity extends ListActivity {
 			empty.setText(getString(R.string.storage_not_available, mAudioService.getAudioPath()));
 		}
 		adapter.clear();
+
+		mAudioService.load(1);
 		Set<String> files = mAudioService.getCurrentPinYin();
 		if (files == null || files.size() == 0) {
 			empty.setText(R.string.audio_empty);
@@ -225,15 +232,19 @@ public class ListAudioActivity extends ListActivity {
 		String name = (String) v.getTag();
 		if(name == null)
 			name = (String) this.getListAdapter().getItem(position);
-		mAudioService.select(name);
-		mAudioService.play();
+		try {
+			mAudioService.select(name);
+			mAudioService.play();
+		}catch(Exception e) {
+			Log.e("xx", "TODO");
+		}
 	}
 	
 	@Bind(android.R.id.empty) TextView empty;
 	
 	@Inject IPinYinAudioService mAudioService;
 
-	@Bind(R.id.name) TextView input;
+	TextView input;
 
 	@Inject SharedPreferences settings;
 }

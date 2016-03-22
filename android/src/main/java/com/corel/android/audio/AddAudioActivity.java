@@ -32,8 +32,7 @@ public class AddAudioActivity extends BaseButterKnifeActivity {
 	public static final int UPDATE = 1;
 	
 	@Inject @Named("PCM") IAudioRecorder mRecorder;
-	//@Inject @Named("PCM")
-	String prefix = ".wav";
+	private final static String prefix = ".wav";
 	private MediaPlayer mPlayer;
 	
 	private int mDuration;
@@ -83,8 +82,6 @@ public class AddAudioActivity extends BaseButterKnifeActivity {
 			mPlayer = new MediaPlayer();
 			mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 		}
-
-		
 		mPlayer.reset();
 		String fileName = mAudioNameTV.getText().toString()+ prefix;
 		String path =  new File(mAudioService.getAudioPath(), fileName).getAbsolutePath();

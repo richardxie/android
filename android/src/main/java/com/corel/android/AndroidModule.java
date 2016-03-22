@@ -7,6 +7,7 @@ import android.location.LocationManager;
 import android.preference.PreferenceManager;
 
 import com.corel.android.audio.AddAudioActivity;
+import com.corel.android.audio.ListAudioActivity;
 import com.corel.android.gesture.AddGestureActivity;
 import com.corel.android.gesture.CreateGestureActivity;
 import com.corel.android.pinyin.PinYinModule;
@@ -28,7 +29,8 @@ import static android.content.Context.LOCATION_SERVICE;
         injects = {
                 CreateGestureActivity.class,
                 AddGestureActivity.class,
-                AddAudioActivity.class
+                AddAudioActivity.class,
+                ListAudioActivity.class
         },
         library = true
 )

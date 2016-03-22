@@ -33,7 +33,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 public final class PinYin implements Parcelable{
     public static final String AUTHORITY = "com.corel.provider.PinYin";
-    public static final String AUDIO_PR = ".mp3";
+    public static final String AUDIO_PR = ".wav";
     public static final String PINYIN_TABLE_NAME = "pinyin";
 
 	@Override

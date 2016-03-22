@@ -3,6 +3,7 @@ package com.corel.android.audio;
 import com.corel.android.pinyin.IPinYinService;
 
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Audio Service for Pinyin
@@ -20,14 +21,14 @@ public interface IPinYinAudioService extends IPinYinService {
 	 * @param id
 	 *            audio id
 	 */
-	void select(int id);
+	void select(int id) throws ExecutionException, InterruptedException;
 
-	void select(String name);
+	void select(String name) throws ExecutionException, InterruptedException;
 
 	/**
 	 * play audio
 	 */
-	void play();
+	void play() throws ExecutionException, InterruptedException;
 
 	/**
 	 * stop audio

@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
 import javax.inject.Inject;
@@ -112,7 +113,8 @@ public class PinYinFileAudioService implements IPinYinAudioService, IAudioRecogn
 	public boolean save() {return false;}
 
 	@Override
-	public void select(int id) throws AudioSelectedFailedException{
+	public void select(int id) throws AudioSelectedFailedException, ExecutionException, InterruptedException {
+		mTask.get();
 		Log.i(TAG, "select audio id:" + id);
 		if(!mSoundMap.containsValue(Integer.valueOf(id)))
 			throw new AudioSelectedFailedException("No such audio for id:" + id);
@@ -120,8 +122,9 @@ public class PinYinFileAudioService implements IPinYinAudioService, IAudioRecogn
 	}
 	
 	@Override
-	public void select(String name) throws AudioSelectedFailedException{
+	public void select(String name) throws AudioSelectedFailedException, ExecutionException, InterruptedException {
 		Log.i(TAG, "select audio name:" + name);
+		mTask.get();
 		String fileName = name + PinYin.AUDIO_PR;
 		if(!mSoundMap.containsKey(fileName))
 			throw new AudioSelectedFailedException("No such audio for name:" + name);
@@ -129,8 +132,9 @@ public class PinYinFileAudioService implements IPinYinAudioService, IAudioRecogn
 	}
 
 	@Override
-	public void play() {
+	public void play() throws ExecutionException, InterruptedException {
 		Log.i(TAG, "Play a audio");
+		mTask.get();
 		if(mSoundPool.play(mCurrentSoundID, 1, 1, 1, 0, 1) == 0)
 			Log.e(TAG, "failed to play audio, id = " + mCurrentSoundID);
 	}
@@ -160,11 +164,12 @@ public class PinYinFileAudioService implements IPinYinAudioService, IAudioRecogn
 	
 	@Override
 	public String getAudioPath() {
-		return mSoundFolder.getAbsolutePath();
+		return new File(mSoundFolder, "card" + mCardNumber).getAbsolutePath() ;
 	}
 
 	@Override
 	public void release() {
+		mTask.cancel(true);
 		Log.i(TAG, "release current audio servcie");
 		mSoundPool.release();
 	}

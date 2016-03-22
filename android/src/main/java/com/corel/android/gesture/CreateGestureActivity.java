@@ -23,6 +23,8 @@ import android.widget.TextView;
 import com.corel.android.BaseButterKnifeActivity;
 import com.corel.android.HelloAndroidApplication;
 import com.corel.android.R;
+import com.corel.android.audio.AudioSelectedFailedException;
+import com.corel.android.audio.IPinYinAudioService;
 import com.corel.android.pinyin.PinYin;
 import com.corel.android.pinyin.service.PinyinAPI;
 import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView;
@@ -60,6 +62,7 @@ public class CreateGestureActivity extends BaseButterKnifeActivity {
 
 		//RxRecyclerViewAdapter.dataChanges(adapter).
 		mGestureService.load(1);
+		mAudioService.load(1);
 	}
 
 	//done Button
@@ -85,7 +88,11 @@ public class CreateGestureActivity extends BaseButterKnifeActivity {
 
     public List<PinYin> mWords;
 	
-	@Inject IPinYinGestureService mGestureService;
+	@Inject
+	IPinYinGestureService mGestureService;
+
+	@Inject
+	IPinYinAudioService mAudioService;
 
 	public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ListItemViewHolder> {
 
@@ -115,6 +122,16 @@ public class CreateGestureActivity extends BaseButterKnifeActivity {
 			if(g!=null) {
 				viewHolder.gesture.setImageBitmap(g.get(0).toBitmap(50,50,1, Color.CYAN));
 			}
+
+			try {
+				mAudioService.select(model.getChinese());
+				viewHolder.audio.setImageResource(android.R.drawable.ic_media_play);
+			}catch (AudioSelectedFailedException e) {
+				Log.e(TAG, "no sound for " + model.getChinese());
+			}catch (Exception ex) {
+				Log.e(TAG, "exception for " + model.getChinese());
+			}
+
 			viewHolder.itemView.setActivated(selectedItems.get(position, false));
 		}
 
@@ -130,6 +147,8 @@ public class CreateGestureActivity extends BaseButterKnifeActivity {
 			TextView pinyin;
 			@Bind(R.id.gesture)
 			ImageView gesture;
+			@Bind(R.id.audio)
+			ImageView audio;
 
 			public ListItemViewHolder(View itemView) {
 				super(itemView);

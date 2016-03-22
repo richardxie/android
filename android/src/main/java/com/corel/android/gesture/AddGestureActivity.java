@@ -1,11 +1,14 @@
 package com.corel.android.gesture;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -16,6 +19,8 @@ import android.widget.Toast;
 import com.corel.android.BaseButterKnifeActivity;
 import com.corel.android.HelloAndroidApplication;
 import com.corel.android.R;
+import com.corel.android.audio.AddAudioActivity;
+import com.corel.android.login.LoginActivity;
 import com.jakewharton.rxbinding.view.RxView;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
@@ -119,6 +124,29 @@ public class AddGestureActivity extends BaseButterKnifeActivity {
 
             mDoneButton.setEnabled(true);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0,0,0,"Audio")
+                .setIcon( android.R.drawable.ic_btn_speak_now)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case 0:
+                Intent intent = new Intent(this, AddAudioActivity.class);
+                intent.putExtra("name", name);
+                startActivity(intent);
+                break;
+        }
+
+        return true;
     }
 
     /*@OnClick(R.id.done)*/

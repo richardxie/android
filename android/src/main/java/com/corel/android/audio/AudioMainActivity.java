@@ -36,7 +36,7 @@ public class AudioMainActivity extends BaseButterKnifeActivity {
             }
                 break;
             case R.id.audioListBtn: {
-                Intent intent = new Intent(this, AddAudioActivity.class);
+                Intent intent = new Intent(this, ListAudioActivity.class);
                 intent.putExtra("name","好");
                 startActivity(intent);
             }
