@@ -15,9 +15,10 @@ model {
         libs(PrebuiltLibraries) {
             opencv {
                 headers.srcDir "${opencv_sdk_path}/jni/include"
-                binaries.withType(StaticLibraryBinary) {
-                    staticLibraryFile = file("${opencv_sdk_path}/jniLibs/armeabi/libopencv_core.a")
-                   // staticLibraryFile = file("${opencv_sdk_path}/jniLibs/armeabi/libtbb.a")
+                binaries.withType(SharedLibraryBinary) {
+                    sharedLibraryFile  = file("${opencv_sdk_path}/jniLibs/${targetPlatform.getName()}/libopencv_java3.so")
+
+                    // staticLibraryFile = file("${opencv_sdk_path}/jniLibs/armeabi/libtbb.a")
 
                 }
             }
@@ -43,7 +44,7 @@ model {
                          "-std=c++11"])
         // CFlags is configured in similiar way as cppFlags
         // CFlags.add("-I${file("src/main/jni/native_app_glue")}".toString())
-        ldLibs.addAll(["android","log", "opencv_java3"])
+        ldLibs.addAll(["android","log"])
         //stl         = "c++_static"
         stl    = "gnustl_static"
         abiFilters.addAll(["armeabi"]) //filtering ABIs on the ones Google Play Games library is compatible with.
@@ -57,7 +58,7 @@ model {
                     srcDirs 'src/main/jni'
                 }
                 dependencies {
-                   library 'opencv' linkage 'static'
+                   library 'opencv'
                 }
             }
         }
@@ -86,10 +87,10 @@ model {
 }
 
 dependencies {
-    compile project( ':opencv')
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //compile project( ':opencv')
+    //compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "com.android.support:support-v4:${rootProject.ext.supportV4}"
+    //compile "com.android.support:support-v4:${rootProject.ext.supportV4}"
 
 }
 
